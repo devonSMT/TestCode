@@ -5,15 +5,21 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class Deck {
-	public List<Card> gameDeck = new ArrayList<Card>();
-	public List<Card> activePile = new ArrayList<Card>();
-	public List<Card> discardPile = new ArrayList<Card>();
+public abstract class Deck {
+	protected List<Card> gameDeck = new ArrayList<Card>();
+	private List<Card> activePile = new ArrayList<Card>();
+	private List<Card> discardPile = new ArrayList<Card>();
 	
-	/** 
-	 * Class constructor	
+	/**
+	 * Method for each subclass to implement to build the class
 	 */
-	public Deck(){	
+	public abstract void buildDeck();
+	
+	/**
+	 * Prints a string representation of the current deck
+	 */
+	public String toString() {
+		return gameDeck.toString();
 	}
 	
 	/**
@@ -29,8 +35,8 @@ public class Deck {
 	 * Adds selected cards from deck to cards being used pile
 	 * @param cards
 	 */
-	public void activeCards(Card cards){
-		activePile.add(cards);
+	public void addActiveCard(Card card){
+		activePile.add(card);
 	}
 	/**
 	 * returns the list of active cards
@@ -42,17 +48,17 @@ public class Deck {
 	/**
 	 * handles getting cards from deck
 	 */
-	public Card getACard(List<Card> cards){ 
-		Card p = cards.remove(0);
-		this.activeCards(p);
+	public Card getACard(){ 
+		Card p = gameDeck.remove(0);
+		this.addActiveCard(p);
 		return p;
 	}
 
 	/**
 	 * shuffles the deck
 	 */
-	public void shuffle(List<Card> card){
-		Collections.shuffle(card);
+	public void shuffle(){
+		Collections.shuffle(gameDeck);
 	}
 	/**
 	 * method that helps handle if deck runs out of cards
@@ -62,8 +68,16 @@ public class Deck {
 	public List<Card> getCurrentDeck(){
 		if(this.gameDeck.isEmpty()){
 			this.gameDeck.addAll(this.discardPile);
-			shuffle(gameDeck);
+			shuffle();
 			return this.gameDeck;
 		}else return this.gameDeck;
+	}
+	
+	/**
+	 * Provides the list of cards that are in use and not in the deck
+	 * @return
+	 */
+	public List<Card> getActiveCards() {
+		return this.activePile;
 	}
 }

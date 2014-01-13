@@ -1,12 +1,9 @@
 package com.siliconmtn.blackjack.deck;
 
 import java.util.Iterator;
-import java.util.List;
 
 public class StandardDeck52 extends Deck {
 
-	public List<Card> gDeck = this.gameDeck;
-	public List<Card> inplayDeck = this.activePile;
 	/**
 	 * Class constructor
 	 */
@@ -20,17 +17,14 @@ public class StandardDeck52 extends Deck {
 	 * 
 	 * @return
 	 */
-	public List<Card> buildDeck() {
-		for (Iterator<Integer> iter = Suit.getSuits().keySet().iterator(); iter
-				.hasNext();) {
+	public void buildDeck() {
+		for (Iterator<Integer> iter = Suit.getSuits().keySet().iterator(); iter.hasNext();) {
 			Suit s = new Suit(iter.next());
 			for (int i = 1; i < 14; i++) {
-				Card card = new Card(s, i, determineLabel(i), determineLow(i), 
-						determineHigh(i));
-				gDeck.add(card);
+				Card card = new Card(s, i, determineLabel(i), determineLow(i), determineHigh(i));
+				this.gameDeck.add(card);
 			}
 		}
-		return gDeck;
 	}
 
 	/**

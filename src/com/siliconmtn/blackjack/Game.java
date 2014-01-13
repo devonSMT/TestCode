@@ -12,16 +12,15 @@ public class Game {
 		Location l = new Location("las vegas", "nevada", 89124);
 		Dealer person = new Dealer("mary","sue", "female", l);
 		System.out.println(person.getFullName() + " " + person.getCityStateZip());
-		Deck deck;
-		deck = new StandardDeck52();
-		System.out.println(deck.gameDeck);
-		deck.shuffle(deck.gameDeck);
-		System.out.println(deck.gameDeck);
-		System.out.println(deck.getACard(deck.gameDeck));
-		System.out.println(deck.getACard(deck.gameDeck));
-		System.out.println(deck.getACard(deck.gameDeck));
-		System.out.println(deck.getACard(deck.gameDeck));
-		System.out.println(deck.activePile);
+		Deck deck = new StandardDeck52();
+		System.out.println(deck);
+		deck.shuffle();
+		System.out.println(deck);
+		System.out.println(deck.getACard());
+		System.out.println(deck.getACard());
+		System.out.println(deck.getACard());
+		System.out.println(deck.getACard());
+		System.out.println(deck.getActiveCards());
 
 		System.out.println(deck.getCurrentDeck() + "\n");
 		
