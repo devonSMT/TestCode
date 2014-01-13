@@ -1,4 +1,4 @@
-package com.siliconmtn.blackjack.person;
+package com.siliconmtn.game.person;
 
 public class Location {
 	private String city;

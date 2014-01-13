@@ -1,9 +1,9 @@
-package com.siliconmtn.blackjack.person;
+package com.siliconmtn.game.person;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.siliconmtn.blackjack.deck.Card;
+import com.siliconmtn.game.Card;
 
 public class Player extends Person {
 

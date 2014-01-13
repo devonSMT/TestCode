@@ -1,4 +1,5 @@
-package com.siliconmtn.blackjack.deck;
+package com.siliconmtn.game;
+
 
 
 public class Card {

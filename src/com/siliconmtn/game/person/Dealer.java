@@ -1,15 +1,15 @@
-package com.siliconmtn.blackjack.person;
+package com.siliconmtn.game.person;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.siliconmtn.blackjack.deck.Card;
-import com.siliconmtn.blackjack.rules.Rules21;
+import com.siliconmtn.game.Card;
+import com.siliconmtn.game.blackjack.Rule21;
 
 public class Dealer extends Player {
 
 	private List<Card> dealersHand = new ArrayList<Card>();
-	public Rules21 rules = new Rules21();
+	public Rule21 rules = new Rule21();
 	
 	/**
 	 * Class Constructor

@@ -1,4 +1,4 @@
-package com.siliconmtn.blackjack.deck;
+package com.siliconmtn.game;
 
 import java.util.HashMap;
 

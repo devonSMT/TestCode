@@ -1,9 +1,9 @@
-package com.siliconmtn.blackjack;
+package com.siliconmtn.game.blackjack;
 
-import com.siliconmtn.blackjack.deck.Deck;
-import com.siliconmtn.blackjack.deck.StandardDeck52;
-import com.siliconmtn.blackjack.person.Dealer;
-import com.siliconmtn.blackjack.person.Location;
+import com.siliconmtn.game.Deck;
+import com.siliconmtn.game.StandardDeck52;
+import com.siliconmtn.game.person.Dealer;
+import com.siliconmtn.game.person.Location;
 
 public class Game {
 

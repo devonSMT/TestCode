@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="com.siliconmtn.blackjack.deck.Card" project="TestCode" 
-    file="/TestCode/src/com/siliconmtn/blackjack/deck/Card.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="com.siliconmtn.game.Card" project="TestCode" 
+    file="/TestCode/src/com/siliconmtn/game/Card.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="656" y="361"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="com.siliconmtn.blackjack.deck.Deck" project="TestCode" 
-    file="/TestCode/src/com/siliconmtn/blackjack/deck/Deck.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="com.siliconmtn.game.Deck" project="TestCode" 
+    file="/TestCode/src/com/siliconmtn/game/Deck.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1041" y="275"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="com.siliconmtn.blackjack.deck.StandardDeck52" project="TestCode" 
-    file="/TestCode/src/com/siliconmtn/blackjack/deck/StandardDeck52.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="com.siliconmtn.game.StandardDeck52" project="TestCode" 
+    file="/TestCode/src/com/siliconmtn/game/StandardDeck52.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="863" y="87"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="com.siliconmtn.blackjack.deck.Suit" project="TestCode" 
-    file="/TestCode/src/com/siliconmtn/blackjack/deck/Suit.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="com.siliconmtn.game.Suit" project="TestCode" 
+    file="/TestCode/src/com/siliconmtn/game/Suit.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="253" y="201"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.siliconmtn.blackjack.person.Person" project="TestCode" 
-    file="/TestCode/src/com/siliconmtn/blackjack/person/Person.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="com.siliconmtn.game.person.Person" project="TestCode" 
+    file="/TestCode/src/com/siliconmtn/game/person/Person.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="351" y="558"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="com.siliconmtn.blackjack.person.Player" project="TestCode" 
-    file="/TestCode/src/com/siliconmtn/blackjack/person/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="com.siliconmtn.game.person.Player" project="TestCode" 
+    file="/TestCode/src/com/siliconmtn/game/person/Player.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="666" y="654"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="com.siliconmtn.blackjack.person.Dealer" project="TestCode" 
-    file="/TestCode/src/com/siliconmtn/blackjack/person/Dealer.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="com.siliconmtn.game.person.Dealer" project="TestCode" 
+    file="/TestCode/src/com/siliconmtn/game/person/Dealer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="989" y="597"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="com.siliconmtn.blackjack.rules.Rules21" project="TestCode" 
-    file="/TestCode/src/com/siliconmtn/blackjack/rules/Rules21.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="com.siliconmtn.game.rule.Rules21" project="TestCode" 
+    file="/TestCode/src/com/siliconmtn/game/rule/Rules21.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1240" y="559"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="com.siliconmtn.blackjack.person.Location" project="TestCode" 
-    file="/TestCode/src/com/siliconmtn/blackjack/person/Location.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="com.siliconmtn.game.person.Location" project="TestCode" 
+    file="/TestCode/src/com/siliconmtn/game/person/Location.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="86" y="571"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
