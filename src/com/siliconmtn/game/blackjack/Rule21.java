@@ -20,17 +20,7 @@ public class Rule21 {
         private int numOfPlayers = 0;
         private int cardsToDeal = 0;
         private double housesBank = 0;
-        public Scanner input = null;
-        
-        /**
-         * Determines if you got 21 or not
-         * @return
-         */
-        public int evaluateCards(int card1, int card2){
-                int totalVaule;
-                totalVaule = card1 + card2;
-                return totalVaule;
-        }
+        private Scanner input = null;
         /**
          * determines the lowest and highest amount of money to bet per round
          * @return

@@ -1,5 +1,17 @@
 package com.siliconmtn.game.person;
 
+/****************************************************************************
+ * <b>Title</b>: Test.javaIncomingDataWebService.java <p/>
+ * <b>Project</b>: BlackJackProjectRAMDataFeed <p/>
+ * <b>Description: </b>
+ * <b>Copyright:</b> Copyright (c) 2014<p/>
+ * <b>Company:</b> Silicon Mountain Technologies<p/>
+ * @author Devon
+ * @version 1.0
+ * @since 3:34:23 PM<p/>
+ * <b>Changes: </b>
+ ****************************************************************************/
+
 public class Person {
 	
 	protected String firstName;
@@ -11,6 +23,12 @@ public class Person {
 
 	}
 	//create getters and setters for variables so other classes can access
+	/**
+	 * Returns a String representation persons' name,state, etc..
+	 */
+	public String toString(){
+		return getPerson();
+	}
 	/**
 	 * 
 	 * @return the first name
@@ -53,5 +71,9 @@ public class Person {
 	public String getCityStateZip(){
 		return this.location.getCity() + "," +  this.location.getState() + 
 				" " + this.location.getZip();
+	}
+	
+	public String getPerson(){
+		return getFullName() + " " + getCityStateZip();
 	}
 }

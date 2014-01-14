@@ -1,15 +1,23 @@
 package com.siliconmtn.game.person;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.siliconmtn.game.Card;
-import com.siliconmtn.game.blackjack.Rule21;
 
+/****************************************************************************
+ * <b>Title</b>: Test.javaIncomingDataWebService.java <p/>
+ * <b>Project</b>: BlackJackProjectRAMDataFeed <p/>
+ * <b>Description: </b>
+ * <b>Copyright:</b> Copyright (c) 2014<p/>
+ * <b>Company:</b> Silicon Mountain Technologies<p/>
+ * @author Devon
+ * @version 1.0
+ * @since 3:34:23 PM<p/>
+ * <b>Changes: </b>
+ ****************************************************************************/
 public class Dealer extends Player {
-
-	private List<Card> dealersHand = new ArrayList<Card>();
-	public Rule21 rules = new Rule21();
+	
+	protected Hand hand;
 	
 	/**
 	 * Class Constructor
@@ -25,7 +33,6 @@ public class Dealer extends Player {
 		this.gender = gender;
 		this.location = loc;
 	}
-
 	/**
 	 * Deal cards to players
 	 * @return
@@ -34,11 +41,5 @@ public class Dealer extends Player {
 		Card oneCard = cards.remove(0);
 		return oneCard;
 	}	
-	/**
-	 * Show dealers current hand
-	 * @return
-	 */
-	public List<Card> getHand(){
-		return this.dealersHand;
-	}
+
 }

@@ -2,6 +2,18 @@ package com.siliconmtn.game;
 
 import java.util.Iterator;
 
+/****************************************************************************
+ * <b>Title</b>: Test.javaIncomingDataWebService.java <p/>
+ * <b>Project</b>: BlackJackProjectRAMDataFeed <p/>
+ * <b>Description: </b>
+ * <b>Copyright:</b> Copyright (c) 2014<p/>
+ * <b>Company:</b> Silicon Mountain Technologies<p/>
+ * @author Devon
+ * @version 1.0
+ * @since 3:34:23 PM<p/>
+ * <b>Changes: </b>
+ ****************************************************************************/
+
 public class StandardDeck52 extends Deck {
 
 	/**
@@ -11,9 +23,8 @@ public class StandardDeck52 extends Deck {
 		this.buildDeck();
 		
 	}
-	
 	/**
-	 *  that builds deck
+	 * builds deck of 52 cards
 	 * 
 	 * @return
 	 */

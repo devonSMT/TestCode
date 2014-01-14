@@ -1,13 +1,20 @@
 package com.siliconmtn.game.person;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import com.siliconmtn.game.Card;
-
+/****************************************************************************
+ * <b>Title</b>: Test.javaIncomingDataWebService.java <p/>
+ * <b>Project</b>: BlackJackProjectRAMDataFeed <p/>
+ * <b>Description: </b>
+ * <b>Copyright:</b> Copyright (c) 2014<p/>
+ * <b>Company:</b> Silicon Mountain Technologies<p/>
+ * @author Devon
+ * @version 1.0
+ * @since 3:34:23 PM<p/>
+ * <b>Changes: </b>
+ ****************************************************************************/
 public class Player extends Person {
 
-	private List<Card> hand = new ArrayList<Card>();
+	protected Hand hand;
 	private double totalMoney = 0;
 	
 	/**
@@ -39,13 +46,6 @@ public class Player extends Person {
 	 */
 	public void setTotalMoney(int totalMoney) {
 		this.totalMoney = totalMoney;
-	}
-	/**
-	 * Show players current hand
-	 * @return
-	 */
-	public List<Card> getHand(){
-		return this.hand;
 	}
 
 }

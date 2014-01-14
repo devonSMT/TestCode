@@ -4,7 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+/****************************************************************************
+ * <b>Title</b>: Test.javaIncomingDataWebService.java <p/>
+ * <b>Project</b>: BlackJackProjectRAMDataFeed <p/>
+ * <b>Description: </b>
+ * <b>Copyright:</b> Copyright (c) 2014<p/>
+ * <b>Company:</b> Silicon Mountain Technologies<p/>
+ * @author Devon
+ * @version 1.0
+ * @since 3:34:23 PM<p/>
+ * <b>Changes: </b>
+ ****************************************************************************/
 public abstract class Deck {
 	protected List<Card> gameDeck = new ArrayList<Card>();
 	private List<Card> activePile = new ArrayList<Card>();
@@ -39,13 +49,6 @@ public abstract class Deck {
 		activePile.add(card);
 	}
 	/**
-	 * returns the list of active cards
-	 * @return
-	 */
-	public List<Card> cardsOut(){
-		return activePile;
-	}
-	/**
 	 * handles getting cards from deck
 	 */
 	public Card getACard(){ 
@@ -78,6 +81,6 @@ public abstract class Deck {
 	 * @return
 	 */
 	public List<Card> getActiveCards() {
-		return this.activePile;
+		return activePile;
 	}
 }
