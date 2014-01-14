@@ -14,11 +14,15 @@ package com.siliconmtn.game;
 
 public class Card {
 	
+    public static final String LOW_HAND_VALUE = "lowHandValue";
+    public static final String HIGH_HAND_VALUE = "highHandValue";
+    
 	protected String name;
 	protected Suit suit;
 	protected int rank;
 	protected int lowValue = 0;
 	protected int highValue = 0;
+	protected boolean visible = true;
 	
 	/**
 	 * Class Constructor
@@ -81,5 +85,19 @@ public class Card {
 	 */
 	public String getHighLow(){
 		return "The values are " + getLowValue() + " and " + getHighValue();
+	}
+
+	/**
+	 * @return the visible
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * @param visible the visible to set
+	 */
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 }
