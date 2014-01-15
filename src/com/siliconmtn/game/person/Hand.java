@@ -23,7 +23,7 @@ public class Hand {
 	 * Collection of cards that make up the hand
 	 */
     protected List<Card> cards = new ArrayList<Card>();
-    
+    	
     /**
      * Allows person to add a card to their hand
      * @param card
@@ -73,7 +73,7 @@ public class Hand {
     }
     
     /**
-     * 
+     * Returns a list of the cards in hand
      * @return
      */
     public List<Card> getCards(){

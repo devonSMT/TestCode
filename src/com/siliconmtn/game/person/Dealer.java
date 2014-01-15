@@ -3,6 +3,7 @@ package com.siliconmtn.game.person;
 import java.util.List;
 
 import com.siliconmtn.game.Card;
+import com.siliconmtn.game.blackjack.Rule21;
 
 /****************************************************************************
  * <b>Title</b>: Test.javaIncomingDataWebService.java <p/>
@@ -18,7 +19,7 @@ import com.siliconmtn.game.Card;
 public class Dealer extends Player {
 	
 	protected Hand hand;
-	
+	protected Rule21 ruleSet;
 	/**
 	 * Class Constructor
 	 * @param first
@@ -40,6 +41,25 @@ public class Dealer extends Player {
 	public Card dealCards(List<Card> cards){
 		Card oneCard = cards.remove(0);
 		return oneCard;
-	}	
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public void setRule(Rule21 rule){
+		this.ruleSet = rule;
+	}
+	/**
+	 * Allows dealer to verify the rules of the game
+	 */
+	public Rule21 checkRules(){
+		return this.ruleSet;
+	}
+	/**
+	 * Returns the dealers hand
+	 */
+	public Hand getHand(){
+		return this.hand;
+	}
 
 }

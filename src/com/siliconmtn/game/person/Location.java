@@ -33,24 +33,10 @@ public class Location {
 		return city;
 	}
 	/**
-	 * set the city name 
-	 * @param city 
-	 */
-	public void setCity(String city) {
-		this.city = city;
-	}
-	/**
 	 * @return the state
 	 */
 	public String getState() {
 		return state;
-	}
-	/**
-	 * set the state for person
-	 * @param state
-	 */
-	public void setState(String state) {
-		this.state = state;
 	}
 	/**
 	 * 
@@ -58,12 +44,5 @@ public class Location {
 	 */
 	public int getZip() {
 		return zip;
-	}
-	/**
-	 * set the zipcode for person
-	 * @param zip
-	 */
-	public void setZip(int zip) {
-		this.zip = zip;
 	}
 }

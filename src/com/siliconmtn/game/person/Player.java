@@ -15,8 +15,9 @@ package com.siliconmtn.game.person;
 public class Player extends Person {
 
 	protected Hand hand;
+	private double moneyToBet = 0;
 	private double totalMoney = 0;
-	
+
 	/**
 	 * Class Constructor
 	 * @param first
@@ -31,21 +32,35 @@ public class Player extends Person {
 		this.gender = gender;
 		this.location = loc;
 	}
-
+		
 	/**
-	 * 
-	 * @return the amount of money they have
+	 * @return the totalMoney
 	 */
 	public double getTotalMoney() {
 		return totalMoney;
 	}
 
 	/**
+	 * @param totalMoney the totalMoney to set
+	 */
+	public void setTotalMoney(double totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+
+	/**
+	 * 
+	 * @return the amount of money they have
+	 */
+	public double getMoneyToBet() {
+		return moneyToBet;
+	}
+
+	/**
 	 * set amount of money they have
 	 * @param totalMoney
 	 */
-	public void setTotalMoney(int totalMoney) {
-		this.totalMoney = totalMoney;
+	public void setMoneyToBet(int moneyToBet) {
+		this.moneyToBet = moneyToBet;
 	}
 
 }

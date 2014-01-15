@@ -74,6 +74,6 @@ public class Person {
 	}
 	
 	public String getPerson(){
-		return getFullName() + " " + getCityStateZip();
+		return getFullName() + " from " + getCityStateZip();
 	}
 }
