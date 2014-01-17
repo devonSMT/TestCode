@@ -40,10 +40,13 @@ public class Game {
 		// get amount of money players start with
 		
 		//get players, get dealer
+		
+		// Dealer gets deck and shuffles it
 
 	}
 	/**
-	 * Starts the game
+	 * Plays the game by checking players cards, determines results and
+	 * keeps running until they lose all money or give up
 	 */
 	public void startGame() {
 		// call setUpGame
@@ -51,8 +54,6 @@ public class Game {
 		// give a welcome message
 
 		// Ask how much they want to bet this round
-
-		// Dealer gets deck and shuffles it
 
 		// dealer deals cards
 
@@ -66,7 +67,11 @@ public class Game {
 
 		// if dealer has 16 or less have to take another card
 
-		// compare dealer and players hand to decide who wins
+		// get dealer and players hand(call cardTotal on each player hand)
+		
+		//compare each players hand to decide who wins
+		
+		//display message if dealer wins, player wins, or a draw
 
 		// prompt player if they want to play again
 
@@ -82,16 +87,17 @@ public class Game {
 	}
 	
 	/**
-	 * Evaluates if dealer or player wins
+	 * Gets the players total hand value
 	 * @return
 	 */
-	public String compareCards(List<Card> hand){
-		//compare players cards vs dealer
+	public int cardTotal(List<Card> hand){
+		int total = 0;
 		
-		//set message if dealer wins
+		//take list of cards and add together it's values 
 	
-		//or set message if player wins
-		return null;
+		//assign to total return the cards total value
+		
+		return total;
 	}
 	
 	/**

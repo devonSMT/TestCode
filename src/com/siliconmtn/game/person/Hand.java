@@ -43,7 +43,10 @@ public class Hand {
     	
     	return values;
     }
-    
+    /**
+     * 
+     * @return
+     */
     private int getLowValue() {
     	int value = 0; 
     	for(int i = 0; i < cards.size(); i++){
@@ -52,7 +55,10 @@ public class Hand {
     	
     	return value;
     }
-    
+    /**
+     * 
+     * @return
+     */
     private int getHighValue() {
     	int value = 0; 
     	for(int i = 0; i < cards.size(); i++){
