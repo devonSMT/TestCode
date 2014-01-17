@@ -17,36 +17,21 @@ public class Rule21 {
         
 //establishes rules for blackjack
 
-        private int numOfPlayers = 0;
+        public final static int minimumNumOfPlayers = 1;
+        public final static int maxNumOfPlayers = 4;
         private int dealtPerTurn = 0;
-        private double housesBank = 0;
         
 		/**
 		 * Class Constructor
 		 */
-		public Rule21(int players, int dealt, double bank){ 
-			this.numOfPlayers = players;
-			this.dealtPerTurn = dealt;
-			this.housesBank = bank;
+		public Rule21(){ 
 			
 		}
-        /**
-         * @return the numOfPlayers
-         */
-        public int getNumOfPlayers() {
-                return numOfPlayers;
-        }
+
         /**
          * @return the cardsToDeal
          */
         public int getDealtPerTurn() {
                 return dealtPerTurn;
         }
-        /**
-         * @return the housesBank
-         */
-        public double getHousesBank() {
-                return housesBank;
-        }
-                
 }
