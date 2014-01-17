@@ -27,7 +27,9 @@ public class Game {
 	public static void main(String[] args) {
 		Game game = new Game();
 	}
-
+	/**
+	 * Sets up data needed for game
+	 */
 	public void setUpGame() {
 		//get rules
 		
@@ -40,7 +42,9 @@ public class Game {
 		//get players, get dealer
 
 	}
-
+	/**
+	 * Starts the game
+	 */
 	public void startGame() {
 		// call setUpGame
 
