@@ -15,12 +15,12 @@ package com.siliconmtn.game.person;
 public class Location {
 	private String city;
 	private String state;
-	private int zip;
+	private String zip;
 	
 	/**
 	 * public constructor
 	 */
-	public Location(String city, String state, int zip){		
+	public Location(String city, String state, String zip){		
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
@@ -42,7 +42,7 @@ public class Location {
 	 * 
 	 * @return the zipcode for person
 	 */
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
 }

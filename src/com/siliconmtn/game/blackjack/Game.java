@@ -23,36 +23,42 @@ import com.siliconmtn.game.Card;
  ****************************************************************************/
 public class Game {
 
+	private Scanner input = null;
+
 	// Main method
 	public static void main(String[] args) {
 		Game game = new Game();
 	}
+
 	/**
 	 * Sets up data needed for game
 	 */
 	public void setUpGame() {
-		//get rules
-		
-		// get minimum number of players
-		
-		// get minimum bet table for players to seat at
+		// get rules, get goal for game
 
-		// get amount of money players start with
-		
-		//get players, get dealer
-		
+		// get minimum number of players(call checkPlayers method)
+
+		// get minimum bet table for players to seat at(call moneySetter())
+
+		// get amount of money players start with (call moneySetter())
+
+		// establish players, establish dealer
+
 		// Dealer gets deck and shuffles it
-		
-		//display a little message with goal
+
+		// display a little message with goal
 
 	}
+
 	/**
-	 * Plays the game by checking players cards, determines results and
-	 * keeps running until they lose all money or give up
+	 * Plays the game by checking players cards, determines results and keeps
+	 * running until they lose all money or give up
 	 */
 	public void startGame() {
 		// call setUpGame
-
+		
+		//Being loop for game here
+		
 		// Ask how much they want to bet this round
 
 		// dealer deals cards
@@ -68,60 +74,83 @@ public class Game {
 		// if dealer has 16 or less have to take another card
 
 		// get dealer and players hand(call cardTotal on each player hand)
-		
+
 		// determine if they busted, if they do they lose that round
-		
-		//compare each players hand to decide who wins
-		
-		//display message if dealer wins, player wins, or a draw
+
+		// compare each players hand to decide who wins
+
+		// display message if dealer wins, player wins, or a draw
 
 		// prompt player if they want to play again
 
-		//finishGame method() with statements for game over 
-		//if no or out of money give a message with rating. Game ends
+		// finishGame method() with statements for game over
+		// if no or out of money give a message with rating. Game ends
 	}
+
 	/**
-	 * Checks if they busted by going over 21 limit 
+	 * Checks if they busted by going over 21 limit
+	 * 
 	 * @return either true or false
 	 */
-	public boolean busted(int cardValue){
+	public boolean busted(int cardValue) {
 		boolean bust = false;
 		// get total card value and compare it to 21
-		
-		//if they did set bust to true
-		
+
+		// if they did set bust to true
+
 		return bust;
 	}
 
 	/**
-	 *asks if player wants another card
+	 * asks if player wants another card
 	 */
-	public boolean hitOrStay(){
-		//decide if player wants another card or not
+	public boolean hitOrStay() {
+		// decide if player wants another card or not
 		return false;
 	}
-	
+
 	/**
 	 * Gets the players total hand value
+	 * 
 	 * @return
 	 */
-	public int cardTotal(List<Card> hand){
+	public int cardTotal(List<Card> hand) {
 		int total = 0;
-		
-		//take list of cards and add together it's values 
-	
-		//assign to total return the cards total value
-		
+
+		// take list of cards and add together it's values
+
+		// assign to total return the cards total value
+
 		return total;
 	}
-	
+
+	/**
+	 * Checks # of players to ensure they are not over limit
+	 * 
+	 * @return number of players
+	 */
+	public int checkPlayer(int min, int max) {
+		// check to make sure they do not have more or less players
+		// then the rules allow
+		input = new Scanner(System.in);
+		while (true) {
+			int answer = input.nextInt();
+			if (answer < min || answer > max) {
+				System.out
+						.println("Please choose an approiate amount of players.");
+				continue;
+			}
+			return answer;
+		}
+	}
+
 	/**
 	 * gives three options and returns one
 	 * 
 	 * @return the user's choice
 	 */
 	public int moneySetter(int low, int middle, int high) {
-		Scanner input = new Scanner(System.in);
+		input = new Scanner(System.in);
 		while (true) {
 			int choice = input.nextInt();
 			if (choice != low && choice != middle && choice != high) {
