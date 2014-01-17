@@ -42,6 +42,8 @@ public class Game {
 		//get players, get dealer
 		
 		// Dealer gets deck and shuffles it
+		
+		//display a little message with goal
 
 	}
 	/**
@@ -50,8 +52,6 @@ public class Game {
 	 */
 	public void startGame() {
 		// call setUpGame
-
-		// give a welcome message
 
 		// Ask how much they want to bet this round
 
@@ -69,15 +69,30 @@ public class Game {
 
 		// get dealer and players hand(call cardTotal on each player hand)
 		
+		// determine if they busted, if they do they lose that round
+		
 		//compare each players hand to decide who wins
 		
 		//display message if dealer wins, player wins, or a draw
 
 		// prompt player if they want to play again
 
-		// if no or out of money give a message with rating. Game ends
+		//finishGame method() with statements for game over 
+		//if no or out of money give a message with rating. Game ends
 	}
-	
+	/**
+	 * Checks if they busted by going over 21 limit 
+	 * @return either true or false
+	 */
+	public boolean busted(int cardValue){
+		boolean bust = false;
+		// get total card value and compare it to 21
+		
+		//if they did set bust to true
+		
+		return bust;
+	}
+
 	/**
 	 *asks if player wants another card
 	 */
@@ -113,6 +128,7 @@ public class Game {
 				System.out.println("Please choose one of the three choices. ");
 				continue;
 			}
+			input.close();
 			return choice;
 		}
 	}
