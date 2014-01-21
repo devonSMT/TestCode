@@ -1,7 +1,6 @@
 package com.siliconmtn.game.blackjack;
 
-import java.util.HashMap;
-
+// App libs
 import com.siliconmtn.game.StandardDeck52;
 import com.siliconmtn.game.person.Dealer;
 import com.siliconmtn.game.person.Player;
@@ -23,20 +22,12 @@ import com.siliconmtn.game.person.Player;
  *        <b>Changes: </b>
  ****************************************************************************/
 public class Game {
-
-	private HashMap<Integer, String> messages = new HashMap<Integer, String>();
-	
-	//Set constants to use in HashMap for game
-	public static final int WELCOME = 1;
-	public static final int OVER = 2;
-	public static final int HIT = 3;
-	public static final int BETS = 4;
-	public static final int AGAIN = 5;
 	
 	//set defaults for variables
 	private double betTable = 5;
 	private double startAmount = 10;
 	private int numOfPlayers = 1;
+	private GameMessage msg = null;
 	
 	// Main method
 	public static void main(String[] args) {
@@ -67,7 +58,8 @@ public class Game {
 	 */
 	public void setUpGame() {
 		//get messages needed for game
-		this.getMessages();
+		msg = new GameMessage();
+		
 		// get rules, get goal for game
 		Rule21 rule = new Rule21();
 		
@@ -97,13 +89,13 @@ public class Game {
 	 * running until they lose all money or give up
 	 */
 	public void startGame() {
-		System.out.println(WELCOME);
+		System.out.println(msg.getMessage("WELCOME"));
 		
 		//set boolean to use in loop
 		boolean isPlaying = true;
 		
 		//Begin loop for game here while(they want to keep playing)
-		while(isPlaying){
+		while(isPlaying) {
 		
 		// Ask how much they want to bet this round
 
@@ -142,19 +134,5 @@ public class Game {
 		//Display general game over message
 		
 		//Give rating for how well they did based on amount of money they have
-	}
-	
-	/**
-	 * Sets all messages needed for game to use
-	 */
-	private HashMap<Integer, String>getMessages(){
-		//set every message that you need
-		messages.put(WELCOME, "Welcome to BlackJack. Dealer will deal you cards.");
-		messages.put(OVER, "Thanks for playing BlackJack. GAME OVER. ");
-		messages.put(HIT, "Would you like another card?");
-		messages.put(BETS, "How much would you like to bet this round?");
-		messages.put(AGAIN, "Would you like to play another round.");
-		
-		return messages;
 	}
 }
