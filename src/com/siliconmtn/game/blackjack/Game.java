@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.siliconmtn.game.Card;
+import com.siliconmtn.game.person.Hand;
 
 /****************************************************************************
  * <b>Title</b>: Test.javaIncomingDataWebService.java
@@ -27,7 +28,15 @@ public class Game {
 
 	// Main method
 	public static void main(String[] args) {
+		
+		// Initialize the game
 		Game game = new Game();
+		
+		// Setup the game dealers, rules and players
+		game.setUpGame();
+		
+		// Play the game
+		game.startGame();
 	}
 
 	/**
@@ -36,17 +45,17 @@ public class Game {
 	public void setUpGame() {
 		// get rules, get goal for game
 
-		// get minimum number of players(call checkPlayers method)
+		// Create the players
+		
+			// get minimum bet table for players to seat at(call moneySetter())
 
-		// get minimum bet table for players to seat at(call moneySetter())
+			// get amount of money players start with (call moneySetter())
 
-		// get amount of money players start with (call moneySetter())
+			// establish players, establish dealer
 
-		// establish players, establish dealer
-
-		// Dealer gets deck and shuffles it
-
-		// display a little message with goal
+		// Create Deck
+		
+		// Create the Dealer
 
 	}
 
@@ -61,11 +70,11 @@ public class Game {
 		
 		// Ask how much they want to bet this round
 
-		// dealer deals cards
+		// dealer deals cards (Dealer)
 
-		// display cards for dealer and players
+		// display cards for dealer and players (Dealer/Player)
 
-		// prompt player if they want another card
+		// prompt player if they want another card (Dealer)
 
 		// if so give another card
 
@@ -75,9 +84,9 @@ public class Game {
 
 		// get dealer and players hand(call cardTotal on each player hand)
 
-		// determine if they busted, if they do they lose that round
+		// determine if they busted, if they do they lose that round (Rule21)
 
-		// compare each players hand to decide who wins
+		// compare each players hand to decide who wins (Rule21)
 
 		// display message if dealer wins, player wins, or a draw
 
@@ -92,7 +101,7 @@ public class Game {
 	 * 
 	 * @return either true or false
 	 */
-	public boolean busted(int cardValue) {
+	public boolean isBusted(Hand h) {
 		boolean bust = false;
 		// get total card value and compare it to 21
 
@@ -136,8 +145,7 @@ public class Game {
 		while (true) {
 			int answer = input.nextInt();
 			if (answer < min || answer > max) {
-				System.out
-						.println("Please choose an approiate amount of players.");
+				System.out.println("Please choose an approiate amount of players.");
 				continue;
 			}
 			return answer;
