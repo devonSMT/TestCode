@@ -3,6 +3,7 @@ package com.siliconmtn.game.person;
 import java.util.List;
 
 import com.siliconmtn.game.Card;
+import com.siliconmtn.game.StandardDeck52;
 import com.siliconmtn.game.blackjack.Rule21;
 
 /****************************************************************************
@@ -18,8 +19,10 @@ import com.siliconmtn.game.blackjack.Rule21;
  ****************************************************************************/
 public class Dealer extends Player {
 	
-	protected Hand hand;
-	protected Rule21 ruleSet;
+	private Rule21 ruleSet;
+	private StandardDeck52 gameDeck;
+	private int numOfPlayers = 0;
+	private double tableMinimum = 0;
 	/**
 	 * Class Constructor
 	 * @param first
@@ -27,12 +30,13 @@ public class Dealer extends Player {
 	 * @param gender
 	 * @param loc
 	 */
-	public Dealer(String first, String last, String gender, Location loc) {
+	public Dealer(String first, String last, String gender, Location loc ) {
 		super(first, last, gender, loc);
 		this.firstName = first;
 		this.lastName = last;
 		this.gender = gender;
 		this.location = loc;
+
 	}
 	/**
 	 * Deal cards to players
@@ -52,7 +56,7 @@ public class Dealer extends Player {
 	/**
 	 * Allows dealer to verify the rules of the game
 	 */
-	public Rule21 checkRules(){
+	public Rule21 getRules(){
 		return this.ruleSet;
 	}
 	/**
@@ -60,6 +64,53 @@ public class Dealer extends Player {
 	 */
 	public Hand getHand(){
 		return this.hand;
+	}
+	
+	/**
+	 * asks if player wants another card
+	 */
+	public boolean isHitOrStay() {
+		// decide if player wants another card or not
+		
+		// prompt player if they want another card (Dealer)
+					//loop here too
+		return false;
+	}
+	/**
+	 * @return the gameDeck
+	 */
+	public StandardDeck52 getGameDeck() {
+		return gameDeck;
+	}
+	/**
+	 * @param gameDeck the gameDeck to set
+	 */
+	public void setGameDeck(StandardDeck52 gameDeck) {
+		this.gameDeck = gameDeck;
+	}
+	/**
+	 * @return the numOfPlayers
+	 */
+	public int getNumOfPlayers() {
+		return numOfPlayers;
+	}
+	/**
+	 * @param numOfPlayers the numOfPlayers to set
+	 */
+	public void setNumOfPlayers(int numOfPlayers) {
+		this.numOfPlayers = numOfPlayers;
+	}
+	/**
+	 * @return the tableMinimum
+	 */
+	public double getTableMinimum() {
+		return tableMinimum;
+	}
+	/**
+	 * @param tableMinimum the tableMinimum to set
+	 */
+	public void setTableMinimum(double tableMinimum) {
+		this.tableMinimum = tableMinimum;
 	}
 
 }

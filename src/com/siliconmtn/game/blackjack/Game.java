@@ -1,10 +1,10 @@
 package com.siliconmtn.game.blackjack;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.HashMap;
 
-import com.siliconmtn.game.Card;
-import com.siliconmtn.game.person.Hand;
+import com.siliconmtn.game.StandardDeck52;
+import com.siliconmtn.game.person.Dealer;
+import com.siliconmtn.game.person.Player;
 
 /****************************************************************************
  * <b>Title</b>: Test.javaIncomingDataWebService.java
@@ -24,39 +24,72 @@ import com.siliconmtn.game.person.Hand;
  ****************************************************************************/
 public class Game {
 
-	private Scanner input = null;
-
+	private HashMap<Integer, String> messages = new HashMap<Integer, String>();
+	
+	//Set constants to use in HashMap for game
+	public static final int WELCOME = 1;
+	public static final int OVER = 2;
+	public static final int HIT = 3;
+	public static final int BETS = 4;
+	public static final int AGAIN = 5;
+	
+	//set defaults for variables
+	private double betTable = 5;
+	private double startAmount = 10;
+	private int numOfPlayers = 1;
+	
 	// Main method
 	public static void main(String[] args) {
 		
 		// Initialize the game
-		Game game = new Game();
+		Game game = new Game(5.00, 100.00, Rule21.minimumNumOfPlayers);
 		
-		// Setup the game dealers, rules and players
+		// Setup the game dealer, rules and players
 		game.setUpGame();
 		
 		// Play the game
 		game.startGame();
+		
+		// End the game
+		game.finishGame();
+	}
+	
+	//Class Constructor
+	public Game(double betTable, double startAmount, int numOfPlayer){
+		//enter minimum bet, startAmount and #of Players
+		this.betTable = betTable;
+		this.startAmount = startAmount;
+		this.numOfPlayers = numOfPlayer;
 	}
 
 	/**
 	 * Sets up data needed for game
 	 */
 	public void setUpGame() {
+		//get messages needed for game
+		this.getMessages();
 		// get rules, get goal for game
-
-		// Create the players
+		Rule21 rule = new Rule21();
 		
-			// get minimum bet table for players to seat at(call moneySetter())
-
-			// get amount of money players start with (call moneySetter())
-
-			// establish players, establish dealer
-
 		// Create Deck
+		StandardDeck52 deck = new StandardDeck52();
 		
 		// Create the Dealer
-
+		Dealer dealer = new Dealer("sue", "k", null, null);
+		
+			//Assign the rules and deck to dealer
+		dealer.setRule(rule);
+		dealer.setGameDeck(deck);
+			//tell dealer #of Players and table minimum
+		dealer.setNumOfPlayers(this.numOfPlayers);
+		dealer.setTableMinimum(this.betTable);
+		
+		// Create the player(s)
+		Player player1 = new Player("mike","rogers",null, null);
+		
+			// set start amount to player(s)
+		player1.setTotalMoney(this.startAmount);		
+		
 	}
 
 	/**
@@ -64,110 +97,64 @@ public class Game {
 	 * running until they lose all money or give up
 	 */
 	public void startGame() {
-		// call setUpGame
+		System.out.println(WELCOME);
 		
-		//Being loop for game here
+		//set boolean to use in loop
+		boolean isPlaying = true;
+		
+		//Begin loop for game here while(they want to keep playing)
+		while(isPlaying){
 		
 		// Ask how much they want to bet this round
 
 		// dealer deals cards (Dealer)
+			//should have loop that deals cards based on # of players
 
 		// display cards for dealer and players (Dealer/Player)
-
+			//should have loop here too
+		
 		// prompt player if they want another card (Dealer)
+			//loop here too
+		
+			// if so give another card
 
-		// if so give another card
+			// if no have dealer reveal other card
 
-		// if no have dealer reveal other card
+			// if dealer has 16 or less have to take another card
 
-		// if dealer has 16 or less have to take another card
-
-		// get dealer and players hand(call cardTotal on each player hand)
+		// get dealer and players hand(Dealer, Player)
 
 		// determine if they busted, if they do they lose that round (Rule21)
 
-		// compare each players hand to decide who wins (Rule21)
+			// compare each players hand to decide who wins (Rule21)
 
 		// display message if dealer wins, player wins, or a draw
 
-		// prompt player if they want to play again
-
-		// finishGame method() with statements for game over
-		// if no or out of money give a message with rating. Game ends
-	}
-
-	/**
-	 * Checks if they busted by going over 21 limit
-	 * 
-	 * @return either true or false
-	 */
-	public boolean isBusted(Hand h) {
-		boolean bust = false;
-		// get total card value and compare it to 21
-
-		// if they did set bust to true
-
-		return bust;
-	}
-
-	/**
-	 * asks if player wants another card
-	 */
-	public boolean hitOrStay() {
-		// decide if player wants another card or not
-		return false;
-	}
-
-	/**
-	 * Gets the players total hand value
-	 * 
-	 * @return
-	 */
-	public int cardTotal(List<Card> hand) {
-		int total = 0;
-
-		// take list of cards and add together it's values
-
-		// assign to total return the cards total value
-
-		return total;
-	}
-
-	/**
-	 * Checks # of players to ensure they are not over limit
-	 * 
-	 * @return number of players
-	 */
-	public int checkPlayer(int min, int max) {
-		// check to make sure they do not have more or less players
-		// then the rules allow
-		input = new Scanner(System.in);
-		while (true) {
-			int answer = input.nextInt();
-			if (answer < min || answer > max) {
-				System.out.println("Please choose an approiate amount of players.");
-				continue;
-			}
-			return answer;
+		// prompt player if they want to play again(Dealer)
 		}
-	}
 
+	}
+	
 	/**
-	 * gives three options and returns one
-	 * 
-	 * @return the user's choice
+	 * Runs when game is over and gives message and rating to player
 	 */
-	public int moneySetter(int low, int middle, int high) {
-		input = new Scanner(System.in);
-		while (true) {
-			int choice = input.nextInt();
-			if (choice != low && choice != middle && choice != high) {
-				System.out.println("Please choose one of the three choices. ");
-				continue;
-			}
-			input.close();
-			return choice;
-		}
+	private void finishGame(){
+		//Display general game over message
+		
+		//Give rating for how well they did based on amount of money they have
 	}
-
+	
+	/**
+	 * Sets all messages needed for game to use
+	 */
+	private HashMap<Integer, String>getMessages(){
+		//set every message that you need
+		messages.put(WELCOME, "Welcome to BlackJack. Dealer will deal you cards.");
+		messages.put(OVER, "Thanks for playing BlackJack. GAME OVER. ");
+		messages.put(HIT, "Would you like another card?");
+		messages.put(BETS, "How much would you like to bet this round?");
+		messages.put(AGAIN, "Would you like to play another round.");
+		
+		return messages;
+	}
 }
