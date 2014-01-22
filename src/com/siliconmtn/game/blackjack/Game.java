@@ -69,10 +69,11 @@ public class Game {
 		// Create the Dealer
 		Dealer dealer = new Dealer("sue", "k", null, null);
 		
-			//Assign the rules and deck to dealer
+		//Assign the rules and deck to dealer
 		dealer.setRule(rule);
 		dealer.setGameDeck(deck);
-			//tell dealer #of Players and table minimum
+		
+		//tell dealer #of Players and table minimum
 		dealer.setNumOfPlayers(this.numOfPlayers);
 		dealer.setTableMinimum(this.betTable);
 		
