@@ -77,11 +77,16 @@ public class Game {
 		dealer.setTableMinimum(this.betTable);
 		
 		// Create the player(s)
-		Player player1 = new Player("mike","rogers",null, null);
+		Player player1 = addPlayer("mike","rogers",this.startAmount);
+		Player player2 = addPlayer("sue","rogers",this.startAmount);
+		Player player3 = addPlayer("James","Camire",this.startAmount);
+	}
+	
+	public Player addPlayer(String first, String last, double startAmount) {
+		Player player = new Player(first,last ,null, null);
+		player.setTotalMoney(startAmount);
 		
-			// set start amount to player(s)
-		player1.setTotalMoney(this.startAmount);		
-		
+		return player;
 	}
 
 	/**
