@@ -30,7 +30,7 @@ public class Hand {
      */
     public void addToHand(Card card, boolean visible){
     	card.setVisible(visible);
-    	cards.add(card);
+    	this.cards.add(card);
     }
     
     /**
@@ -40,17 +40,17 @@ public class Hand {
     	Map<String, Integer> values = new LinkedHashMap<String, Integer>(); 
     	values.put(Card.LOW_HAND_VALUE, this.getLowValue());
     	values.put(Card.HIGH_HAND_VALUE, this.getHighValue());
-    	
+
     	return values;
     }
     /**
-     * 
+     * gives back cards low value for hand
      * @return
      */
     private int getLowValue() {
     	int value = 0; 
     	for(int i = 0; i < cards.size(); i++){
-    	 value = cards.get(i).getLowValue();
+    	 value += cards.get(i).getLowValue();
     	}
     	
     	return value;
@@ -62,19 +62,19 @@ public class Hand {
     private int getHighValue() {
     	int value = 0; 
     	for(int i = 0; i < cards.size(); i++){
-    	 value = cards.get(i).getHighValue();
+    	 value += cards.get(i).getHighValue();
     	}
     	
     	return value;
     }
     
     /**
-     * Method that returns a card from itself
+     * Method that returns a card from hand
      */
     public Card viewCard(int cardPosition, boolean removeFromDeck){
     	Card card = cards.get(cardPosition);
     	if (removeFromDeck) cards.remove(cardPosition);
-    	
+ 
     	return card;
     }
     

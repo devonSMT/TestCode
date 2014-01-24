@@ -25,7 +25,6 @@ public class StandardDeck52 extends Deck {
 	}
 	/**
 	 * builds deck of 52 cards
-	 * 
 	 * @return
 	 */
 	public void buildDeck() {
@@ -47,7 +46,7 @@ public class StandardDeck52 extends Deck {
 	private int determineLow(int i) {
 		int low;
 		if (i == 1) {
-			low = 11;
+			low = 1;
 		} else if (i > 10) {
 			low = 10;
 		} else {

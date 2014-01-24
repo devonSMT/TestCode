@@ -20,7 +20,7 @@ import java.util.Scanner;
  ****************************************************************************/
 public class Player extends Person {
 
-	protected Hand hand;
+	protected Hand hand = new Hand();
 	private double moneyToBet = 0;
 	private double totalMoney = 0;
 	Scanner input = null;
@@ -69,7 +69,7 @@ public class Player extends Person {
 	 * 
 	 * @param totalMoney
 	 */
-	public void setMoneyToBet(int moneyToBet) {
+	public void setMoneyToBet(double moneyToBet) {
 		this.moneyToBet = moneyToBet;
 	}
 	/**
