@@ -61,68 +61,56 @@ public class Dealer extends Player {
 	 */
 	public void runGame() {
 		messg = new GameMessage();
-		
+
 		// get each players bet and set it to the amount they bet this round
 		getBet(gamePlayers);
 
 		// dealer should check deck before dealing
 		this.gameDeck.getCurrentDeck();
 
+		// Dealer deals
+		System.out.println(messg.getMessage("DEALER_DEALS"));
+
 		// dealer deals cards to self first, two to start
-		dealCards(2);
+		dealCards(this.hand, Rule21.DEAL_TO_START);
 
 		// Display dealers first card
-		displayCards();
+		displayFirst();
 
 		// prompt player if they want another card (Dealer)
 		runDealing();
 
 		// once all players are done taking cards reveal dealers card
-		System.out.println(messg.getMessage("DEALER") + " " + this.firstName
-				+ messg.getMessage("CARDS_ARE") + this.hand.getCards()
-				+ messg.getMessage("NEW_LINE"));
+		System.out.println(messg.getMessage("DEALERS_CARDS")
+				+ this.hand.getCards() + messg.getMessage("NEW_LINE"));
 
 		// make dealer take a card if under 16
-		checkDealer();
+		checkHand();
 
 		// determine if dealer busted, if so everyone wins
-		if (isBusted()) {
+		if (ruleSet.isBusted(this.hand)) {
+			System.out.println(messg.getMessage("DEALER_BUST"));
+			
 			// double everyone's money
 			for (Player player : this.gamePlayers) {
-				moneyIncrease(player);
+				ruleSet.moneyIncrease(player);
 				disposeCards(player.hand);
 			}
-			//get rid of players and dealers hand, end round
+			// get rid of dealers hand, end round
 			disposeCards(this.hand);
 			return;
 		}
 
 		// compare dealer to players hand and get winner
-		evaluateAllHands(this.gamePlayers);
+		getResults(this.gamePlayers);
 
 		// get rid of dealer's hand
 		disposeCards(this.hand);
-		//END OF ROUND
-		
-		//check how much money they have left
+		// END OF ROUND
+
+		// check how much money they have left
 		checkMoney(gamePlayers);
-		
-	}
 
-	/**
-	 * If dealers hand is under 16, have to take another card
-	 */
-	public void checkDealer() {
-		while (hand.getHandValue().get(Card.LOW_HAND_VALUE) < 16
-				&& hand.getHandValue().get(Card.HIGH_HAND_VALUE) < 16) {
-
-			// if under 16 for both values have to take another card
-			Card card = this.gameDeck.getACard();
-			this.hand.addToHand(card, true);
-			System.out.println(messg.getMessage("TOO_SMALL"));
-			System.out.println("Dealer'" + this.firstName + " cards are "
-					+ this.hand.getCards());
-		}
 	}
 
 	/**
@@ -132,7 +120,7 @@ public class Dealer extends Player {
 		for (Player gamePlayer : this.gamePlayers) {
 
 			// dealer deals cards to player(s), two to start
-			dealCards(gamePlayer, 2);
+			dealCards(gamePlayer.hand, Rule21.DEAL_TO_START);
 
 			// while loop
 			while (true) {
@@ -143,10 +131,10 @@ public class Dealer extends Player {
 						+ messg.getMessage("ANOTHER_CARD"));
 				// if they want to hit give them another card
 				if (userInput() == 1) {
-					dealCards(gamePlayer, 1);
+					dealCards(gamePlayer.hand, Rule21.DEALT_PER_TURN);
 
 					// then evaluate to see they busted
-					if (isBusted(gamePlayer)) {
+					if (ruleSet.isBusted(gamePlayer.hand)) {
 						displayCards(gamePlayer);
 						// take their cards
 						disposeCards(gamePlayer.hand);
@@ -154,7 +142,6 @@ public class Dealer extends Player {
 					}
 					// check if get 21 also
 
-					// ask if they want a another card until they say no
 				} else {
 					// they said no so break loop
 					break;
@@ -165,18 +152,35 @@ public class Dealer extends Player {
 	}
 
 	/**
+	 * If dealers hand is under 16 takes another card
+	 */
+	public void checkHand() {
+		while (ruleSet.isUnderLimit(this.hand)) {
+
+			// if under 16 for both values have to take another card
+			Card card = this.gameDeck.getACard();
+			hand.addToHand(card, true);
+			System.out.println(messg.getMessage("TOO_SMALL"));
+			System.out.println(messg.getMessage("DEALERS_CARDS")
+					+ hand.getCards());
+		}
+	}
+
+	/**
 	 * Checks to see if player is out of money
+	 * 
 	 * @param gamePlayer
 	 */
-	public void checkMoney(List<Player> gamePlayer){
-		for(Player player : gamePlayer ){
-			if(player.getTotalMoney() == 0){
-				//resets their money
+	public void checkMoney(List<Player> gamePlayer) {
+		for (Player player : gamePlayer) {
+			if (player.getTotalMoney() == 0) {
+				// resets their money
 				System.out.println(messg.getMessage("MONEY_OUT"));
 				player.setTotalMoney(tableMinimum);
 			}
 		}
 	}
+
 	/**
 	 * Gets input from user
 	 * 
@@ -221,14 +225,13 @@ public class Dealer extends Player {
 	/**
 	 * Handles displaying of a card with it's value
 	 */
-	public void displayCards() {
-		System.out.println(messg.getMessage("DEALER") + this.firstName
-				+ messg.getMessage("FIRST_CARD") + this.hand.viewCard(0, false)
-				+ messg.getMessage("NEW_LINE"));
+	public void displayFirst() {
+		System.out.println(messg.getMessage("DEALERS_FIRST")
+				+ this.hand.viewCard(0, false) + messg.getMessage("NEW_LINE"));
 	}
 
 	/**
-	 * Override Method for multiple players Handles displaying of cards with
+	 * Handles displaying of cards for multiple players
 	 * their values
 	 */
 	public void displayCards(Player player) {
@@ -239,110 +242,22 @@ public class Dealer extends Player {
 	}
 
 	/**
-	 * checks to see if dealer busted/went over limit
-	 * 
-	 * @return true or false
-	 */
-	public boolean isBusted() {
-		boolean bust = false;
-		if (hand.getHandValue().get(Card.LOW_HAND_VALUE) > 21
-				&& hand.getHandValue().get(Card.HIGH_HAND_VALUE) > 21) {
-			System.out.println(this.hand.getHandValue());
-			System.out.println(messg.getMessage("DEALER_BUST"));
-			bust = true;
-		}
-		return bust;
-	}
-
-	/**
-	 * Override method but pass in a player as parameter evaluates a single
-	 * person's hand
-	 */
-	public boolean isBusted(Player player) {
-		boolean bust = false;
-		if (player.hand.getHandValue().get(Card.LOW_HAND_VALUE) > 21
-				&& player.hand.getHandValue().get(Card.HIGH_HAND_VALUE) > 21) {
-			System.out.println(messg.getMessage("LOSE"));
-			bust = true;
-		}
-		return bust;
-	}
-
-	/**
 	 * method that will compare and evaluate players hand to dealers gives
 	 * message back if they win, lose, draw
 	 */
-	public int evaluateAllHands(List<Player> gamePlayers) {
-		int val = 0;
+	public void getResults(List<Player> gamePlayers) {
 		// loop through each player
 		for (Player player : gamePlayers) {
 
-			// if dealer wins
-			if (hand.getHandValue().get(Card.HIGH_HAND_VALUE) > player.hand
-					.getHandValue().get(Card.HIGH_HAND_VALUE)) {
-				val = 1;
-				// evaluate if they win or not, then clear hand for next round
-				getWinner(val, player);
-				disposeCards(player.hand);
+			int value = ruleSet.evaluateCards(this.hand, player.hand);
 
-				// check if their hands were exactly the same value
-			} else if (hand.getHandValue().get(Card.HIGH_HAND_VALUE) == player.hand
-					.getHandValue().get(Card.HIGH_HAND_VALUE)) {
-				val = 2;
-
-				getWinner(val, player);
-				disposeCards(player.hand);
-
-			} else { // the player wins
-				val = 3;
-
-				getWinner(val, player);
-				disposeCards(player.hand);
-			}
+			// evaluate if they win or not
+			ruleSet.getWinner(value, player);
+			
+			// then clear hand for next round
+			disposeCards(player.hand);
 		}
-		return val;
-	}
 
-	/**
-	 * Determines who win's the round and displays message
-	 */
-	public void getWinner(int value, Player player) {
-		// use switch for different case
-		switch (value) {
-		case 1:
-			// dealer wins
-			System.out.println(player.firstName
-					+ messg.getMessage("DEALER_WINS"));
-			System.out.println(messg.getMessage("CASH")
-					+ player.getTotalMoney());
-			break;
-		case 2:
-			// tie, return their money
-			player.setTotalMoney(player.getTotalMoney()
-					+ player.getMoneyToBet());
-			System.out.println(messg.getMessage("PUSH"));
-			System.out.println(messg.getMessage("CASH")
-					+ player.getTotalMoney());
-			break;
-		case 3:
-			// Player wins and doubles money
-			moneyIncrease(player);
-			System.out.println(player.firstName
-					+ messg.getMessage("PLAYER_WINS"));
-			System.out.println(messg.getMessage("CASH")
-					+ player.getTotalMoney());
-			break;
-		}
-	}
-
-	/**
-	 * If someone wins double their bet
-	 */
-	public void moneyIncrease(Player player) {
-		// take players bet money double it and add it back to total
-		double winnings = player.getMoneyToBet() * 2;
-
-		player.setTotalMoney(player.getTotalMoney() + winnings);
 	}
 
 	/**
@@ -350,7 +265,7 @@ public class Dealer extends Player {
 	 * 
 	 * @return dealt cards
 	 */
-	public void dealCards(Player gamePlayer, int numOfCards) {
+	public void dealCards(Hand hand, int numOfCards) {
 
 		// loop through number of cards they pass in
 		for (int i = 0; i < numOfCards; i++) {
@@ -359,43 +274,22 @@ public class Dealer extends Player {
 			Card card = this.gameDeck.getACard();
 
 			// add card to players hand
-			gamePlayer.hand.addToHand(card, true);
+			hand.addToHand(card, true);
 		}
 
 		// set way to deal cards per round based on rules of game
 	}
 
 	/**
-	 * Takes players cards adds to discards and clears their hand
+	 * adds cards to discards and clears their hand
 	 * 
-	 * @param gamePlayer
+	 * @param playerhand
 	 */
 	public void disposeCards(Hand playerHand) {
 		gameDeck.discards(playerHand.getCards());
 		playerHand.foldHand();
 	}
 
-	/**
-	 * override method to deal cards just to dealer
-	 */
-	public void dealCards(int numOfCards) {
-
-		// since already in dealer case don't need to pass a player
-		for (int i = 0; i < numOfCards; i++) {
-
-			// Needs to get deck first to deal a card
-			Card card = this.gameDeck.getACard();
-
-			// add card to players hand
-			this.hand.addToHand(card, true);
-		}
-
-		// set way to deal cards per round based on rules of game
-	}
-
-	/**
-	 * Get user bet and assign to their bet, subtract from their total
-	 */
 	public void getBet(List<Player> player) {
 		input = new Scanner(System.in);
 		// loop through list of players
