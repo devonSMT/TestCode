@@ -1,7 +1,5 @@
 package com.siliconmtn.game.blackjack;
 
-import java.util.List;
-
 import com.siliconmtn.game.Card;
 import com.siliconmtn.game.person.Hand;
 import com.siliconmtn.game.person.Player;
@@ -65,7 +63,7 @@ public class Rule21 {
 	public boolean isUnderLimit(Hand hand) {
 		boolean under = false;
 		if (hand.getHandValue().get(Card.LOW_HAND_VALUE) < 16
-				&& hand.getHandValue().get(Card.HIGH_HAND_VALUE) < 16) {
+				|| hand.getHandValue().get(Card.HIGH_HAND_VALUE) < 16) {
 			under = true;
 		}
 		return under;
@@ -126,7 +124,7 @@ public class Rule21 {
 	}
 
 	/**
-	 * If someone wins double their bet
+	 * Takes players bet and doubles the amount
 	 */
 	public void moneyIncrease(Player player) {
 
@@ -135,21 +133,6 @@ public class Rule21 {
 
 		// add it back to their total
 		player.setTotalMoney(player.getTotalMoney() + winnings);
-	}
-
-	/**
-	 * Checks # of players to ensure they are not over limit
-	 * 
-	 * @return number of players
-	 */
-	public void checkPlayer(List<Player> players) {
-		// check to make sure they do not have more or less players
-		// then the rules allow
-		if (players.size() < MINIMUM_NUM_PLAYERS
-				|| players.size() > MAX_NUM_PLAYERS) {
-			System.out.println("Please choose an approiate amount of players.");
-		}
-
 	}
 
 }

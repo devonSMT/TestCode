@@ -78,14 +78,10 @@ public class Game {
 		gameDealer.getGameDeck().shuffle();
 		
 		// Create the player(s)
-//		Player player1 = addPlayer("Mike", "rogers", this.startAmount);
-//		Player player2 = addPlayer("Sue", "rogers", this.startAmount);
-		Player player3 = addPlayer("James", "Camire", this.startAmount);
-		Player player4 = addPlayer("Tim", "Johnson", this.startAmount);
+		Player player3 = addPlayer("Captain", "America", this.startAmount);
+		Player player4 = addPlayer("Incredible", "Hulk", this.startAmount);
 
 		// add players to a list of players to let dealer know
-//		addToList(player1);
-//		addToList(player2);
 		addToList(player3);
 		addToList(player4);
 
@@ -131,8 +127,6 @@ public class Game {
 
 			// branch out to method in dealer and let dealer class
 			// handle the rest of the game
-			
-			// after runGame is done will return true or false
 			this.dealer.runGame();
 			
 			//ask if they want to play again

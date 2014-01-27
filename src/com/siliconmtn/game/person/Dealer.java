@@ -338,30 +338,6 @@ public class Dealer extends Player {
 		return validBet;
 	}
 
-	/**
-	 * asks if player wants another card
-	 */
-	public boolean isHitOrStay() {
-		// decide if player wants another card or not
-		boolean hit = false;
-		input = new Scanner(System.in);
-		while (true) {
-			int answer = input.nextInt();
-
-			if (answer != 1 && answer != 2) {
-				// give error
-				System.out.println(messg.getMessage("INCORRECT"));
-				continue;
-
-			} else if (answer == 1) {
-				// return true
-				hit = true;
-			}
-			// return false
-			return hit;
-		}
-
-	}
 
 	/**
 	 * Allows to set rules to dealer
