@@ -41,13 +41,12 @@ public class SpiderInfo {
 	 * @return
 	 */
 	public HashMap<String, String> getAllInformation(){
-		info.put("GET_HTTP", "GET http://");
-		info.put("HREF=", "href=");
-		info.put("<A", "<a");
-		info.put("</A>", "</a>");
-		info.put("SMT_MENU", "smt_menu");
-		info.put("</UL>", "</ul>");
-		info.put("END_TAG", ">");
+		info.put("STARTING", "Starting to parse data in 3, 2, 1...");
+		info.put("SUCCESS", "All files created successfully");
+		info.put("FILE_LOCATION", "/home/dfranklin/Pictures/");
+		info.put("FILE_TYPE_HTML", ".html");
+		info.put("ERROR_FILE", "Error writing to file");
+		info.put("ERROR_SOCKET", "Error! Could not close socket");
 		return info;
 	}
 }

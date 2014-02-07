@@ -1,254 +1,177 @@
 package com.siliconmtn.spider;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
-import com.siliconmtn.spider.file.ToFile;
+
+import com.siliconmtn.spider.connection.Connection;
+import com.siliconmtn.spider.file.FileWriter;
+import com.siliconmtn.spider.parser.Parser;
+
 /****************************************************************************
- * <b>Title</b>: Client.javaIncomingDataWebService.java <p/>
- * <b>Project</b>: WorkingWithStreamsRAMDataFeed <p/>
- * <b>Description: </b>
- * <b>Copyright:</b> Copyright (c) 2014<p/>
- * <b>Company:</b> Silicon Mountain Technologies<p/>
+ * <b>Title</b>: SpiderTestDrive.javaIncomingDataWebService.java
+ * <p/>
+ * <b>Project</b>: SpiderProjectRAMDataFeed
+ * <p/>
+ * <b>Description: </b> <b>Copyright:</b> Copyright (c) 2014
+ * <p/>
+ * <b>Company:</b> Silicon Mountain Technologies
+ * <p/>
+ * 
  * @author Devon
  * @version 1.0
- * @since 12:04:16 PM<p/>
- * <b>Changes: </b>
+ * @since 9:11:50 AM
+ *        <p/>
+ *        <b>Changes: </b>
  ****************************************************************************/
-
 
 public class SpiderSite {
 
-	// Variables that are needed
-	private ToFile converter = null;
-	private SpiderInfo msg = new SpiderInfo();
-	private String subList = "";
-	private final String siteName = "www.siliconmtn.com";
-	
+	// Set up all variables needed for class
+	private Parser parser;
+	private Connection connect;
+	private FileWriter flWriter;
+
+	private SpiderInfo info = null;
+	private StringBuilder spiderBuilder = null;
+	private List<String> links = null;
+	private Socket mySkt;
+	private String sourceAddr = "www.siliconmtn.com";
+	private String fullSource = "http://www.siliconmtn.com";
+	private int portNumber = 80;
+
 	/**
-	 * Main Method
+	 * Main Method, sets up the class then runs it
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
 
-		SpiderSite mySpider = new SpiderSite();
-		mySpider.run();
+		SpiderSite spider = new SpiderSite();
+
+		// set up class
+		spider.setUp();
+
+		// run the class
+		spider.startSpider();
 
 	}
 
 	/**
-	 * Creates a socket, writes to it, then receives info back
-	 * 
-	 * @throws Exception
+	 * Class Constructor, takes source data and port #
 	 */
-	public void run() throws Exception {
-
-		// get socket and write to it
-		Socket mySkt = getSocket("");
-
-		// Get the main page and create a sublist from it
-		getInitialPage(mySkt);
-
-		//Parse out the page to save each top menu file
-		parseToSave();
+	public SpiderSite() {
+		// empty Constructor
 	}
 
 	/**
-	 * Gets the initial page to start parsing process
-	 * 
-	 * @param mainSocket
-	 * @throws Exception
+	 * Sets up the class so the class can be used
 	 */
-	public void getInitialPage(Socket mainSocket) throws Exception {
-		// Read back info from server
-		BufferedReader myReader = new BufferedReader(new InputStreamReader(
-				mainSocket.getInputStream()));
+	public void setUp() {
 
-		// Turn stream into a string
-		StringBuilder wholePage = buildString(myReader);
+		// Connect to server
+		setSocket("", this.portNumber);
 
-		// Make a sublist of the wholePage, sublist will now be set
-		setSubList(wholePage);
+		// Catch back info from server/source
+		spiderBuilder = connect.dataCompiler(mySkt);
 
-		// When finished close socket
-		mainSocket.close();
+		// Close the socket
+		closeSocket();
+
+		// Create instance of info for messages
+		info = new SpiderInfo();
+
+		// Create a new writer
+		flWriter = new FileWriter();
 	}
-	
+
 	/**
-	 * Method that parses the page then saves each file to computer
-	 * @throws Exception
+	 * Starts the spider site program, which gets html from smt.com
 	 */
-	public void parseToSave () throws Exception{
+	public void startSpider() {
 
-		// Parse through smaller list to get all start places of <a tags
-		List<Integer> startLocation = getLocation(msg.getInfo("<A"));
+		// Give message stating you are starting parsing info
+		System.out.println(info.getInfo("STARTING"));
 
-		// Do the same for the end positions of <a tags
-		List<Integer> endLocation = getLocation(msg.getInfo("</A>"));
+		// Parse info to get all a link tags
+		parser = new Parser(spiderBuilder);
 
-		// Parse out the names to get actual page then save each one
-		savePage(getLink(startLocation, endLocation));
+		links = parser.getTags("<a ", "</a>");
+		System.out.println(links);
+
+		// Send links to fileManager to write to files
+		writeToFile(flWriter, 1, 9);
+
+		// End class
+		if (mySkt.isClosed()) {
+			System.out.println(info.getInfo("SUCCESS"));
+		}
 
 	}
-	/**
-	 * 
-	 * @param links
-	 * @throws Exception
-	 */
-	public void savePage(List<String> links) throws Exception {
 
-		// Create an instance of inputStream class
-		converter = new ToFile();
-		
-		//loop through each link and save them
-		for (String link : links) {
+	public void writeToFile(FileWriter writer, int startPoint, int endPoint) {
+		// loop through list of links
+		for (int i = startPoint; i < endPoint; i++) {
+			// Get each menu separately
+			String eachLink = links.get(i);
+
 			// create a start and finish index to get out just the menu name
-			int begin = makeIndex(link, msg.getInfo("HREF="));
-			int end = makeIndex(link, msg.getInfo("END_TAG"));
+			int begin = eachLink.indexOf("href=", 0);
+			int end = eachLink.indexOf(">", 0);
 
 			// get just the menu name
-			String menu = link.substring(begin + 6, end - 1);
+			String menu = eachLink.substring(begin + 6, end - 1);
+			System.out.println(menu);
 
-			// get socket for SMT web site
-			Socket otherSkt = getSocket(menu);
+			// open global socket
+			setSocket(menu, this.portNumber);
 
-			// Create and save the file
-			converter.convertToFile(otherSkt.getInputStream(), menu);
+			// save each link to a file
+			try {
+				flWriter.fileWriter(
+						mySkt.getInputStream(),info.getInfo("FILE_LOCATION") 
+						+ menu+ info.getInfo("FILE_TYPE_HTML"));
 
-			// When finished close socket
-			otherSkt.close();
-
-		}
-	}
-
-	/**
-	 * Creates a socket, writes to it
-	 * 
-	 * @param menu
-	 * @return the socket
-	 * @throws Exception
-	 */
-	public Socket getSocket(String menu) throws Exception {
-
-		// Create a client socket to try to connect to server
-		Socket clientSkt = new Socket(siteName, 80);
-
-		// Open out put stream to send to server
-		PrintStream myPrint = new PrintStream(clientSkt.getOutputStream());
-
-		// Write to server
-		myPrint.println(msg.getInfo("GET_HTTP") + siteName + menu);
-
-		return clientSkt;
-	}
-
-	/**
-	 * Parse's through a block of code and returns a list of links
-	 * 
-	 * @param data
-	 * @return
-	 */
-	public List<String> getLink(List<Integer> dataStart,
-			List<Integer> dataFinish) {
-
-		// Create List of Strings
-		List<String> titles = new ArrayList<String>();
-		// loop through list of numbers and pull out each one
-		for (int i = 0; i < dataStart.size(); i++) {
-
-			// create more indexes to get menu names
-			int str = dataStart.get(i);
-			int fin = dataFinish.get(i);
-
-			// parse through sublist and add to list
-			String menu = subList.substring(str, fin);
-			titles.add(menu);
-			System.out.println(titles);
-		}
-
-		return titles;
-	}
-
-	/**
-	 * Loops through a block of code and returns positions into a list
-	 * 
-	 * @return
-	 */
-	public List<Integer> getLocation(String parseInfo) {
-		// Create list to hold values
-		List<Integer> values = new ArrayList<Integer>();
-
-		// Loop through small list of data
-		int bit = 0;
-		while (bit > -1) {
-			bit = subList.indexOf(parseInfo, bit);
-
-			// If it finds a match will put location into list
-			if (bit > -1) {
-				values.add(bit);
-				bit++;
+				// other wise give error message
+			} catch (IOException e) {
+				System.out.println(info.getInfo("ERROR_FILE"));
+			} catch (Exception e) {
+				System.out.println(info.getInfo("ERROR_FILE"));
 			}
+
+			// close socket
+			closeSocket();
 		}
-		return values;
+
 	}
 
 	/**
-	 * Takes a StringBuilder and parses through and returns a sublist
+	 * Sets the socket and writes to it
 	 * 
-	 * @param totalData
+	 * @param src
+	 * @param portNum
 	 */
-	public void setSubList(StringBuilder totalData) {
+	public void setSocket(String menu, int portNum) {
+		// Connect to server
+		connect = new Connection();
 
-		// Create parameters to start and finish parsing through
-		int start = makeIndex(totalData.toString(), msg.getInfo("SMT_MENU"));
-		int end = makeIndex(totalData.toString(), msg.getInfo("</UL>"));
+		mySkt = connect.getConnection(this.sourceAddr, portNum);
 
-		// pull out info and put into list
-		subList = totalData.toString().substring(start, end);
-
-		System.out.println(subList);
+		// Write request to server
+		connect.writeConnection(mySkt, this.fullSource + menu);
 	}
 
 	/**
-	 * 
-	 * Reads a stream, and builds it together
-	 * 
-	 * @throws Exception
+	 * Closes the socket
 	 */
-	public StringBuilder buildString(BufferedReader reader) throws Exception {
-		// Create a String to hold each line from input
-		String line = null;
+	public void closeSocket() {
 
-		// Make StringBuilder to add all strings together
-		StringBuilder builder = new StringBuilder();
-
-		// Display to console
-		while ((line = reader.readLine()) != null) {
-			// add the lines
-			builder.append(line);
+		// close socket
+		try {
+			mySkt.close();
+		} catch (IOException e) {
+			// give message if failed to close
+			System.out.println(info.getInfo("ERROR_SOCKET"));
 		}
-		return builder;
 	}
-
-	/**
-	 * Creates an index from a source
-	 * 
-	 * @param index
-	 * @return
-	 */
-	public int makeIndex(String source, String word) {
-
-		// create integer to hold index
-		int index = -1;
-
-		// index the source and return a number
-		index = source.indexOf(word);
-
-		return index;
-	}
-
 }

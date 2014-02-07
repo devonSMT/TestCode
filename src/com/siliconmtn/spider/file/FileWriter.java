@@ -23,23 +23,29 @@ import java.io.OutputStream;
  *        <b>Changes: </b>
  ****************************************************************************/
 
-public class ToFile {
+public class FileWriter {
 
 	// Set defaults for variables
 	private OutputStream outputStream = null;
-	private final String FileLocation = "/home/dfranklin/Pictures";
+	
+	/**
+	 * General Class Constructor
+	 */
+	public FileWriter(){
+		//empty constructor
+	}
 
 	/**
-	 * Takes in a stream to read then saves to a html file
-	 * 
-	 * @param webPage
+	 * Takes a stream and writes to specific file location
+	 * @param data - an input stream source
+	 * @param pathToFile - a full path to where file should be stored
+	 * @throws Exception - May throw error if file cannot be written to location
 	 */
-	public void convertToFile(InputStream webPage, String fileName)
+	public void fileWriter(InputStream data, String pathToFile)
 			throws Exception {
 
 		// write the inputStream to a FileOutputStream
-		outputStream = new FileOutputStream(new File(FileLocation + fileName
-				+ ".html"));
+		outputStream = new FileOutputStream(new File(pathToFile));
 
 		int read = 0;
 
@@ -50,7 +56,7 @@ public class ToFile {
 		// and store it in a byte array.
 		// Then return the # of bytes read as an integer.
 		// If at end of file will return -1
-		while ((read = webPage.read(bytes)) != -1) {
+		while ((read = data.read(bytes)) != -1) {
 			
 			// write takes three parameters.
 			// first the data to write
@@ -59,10 +65,10 @@ public class ToFile {
 			outputStream.write(bytes, 0, read);
 		}
 		// Give message if succeeded
-		System.out.println(fileName + " file was created!");
+		System.out.println("File was created!");
 
 		// When finished clean up
-		cleanUp(webPage, outputStream);
+		cleanUp(data, outputStream);
 
 	}
 
@@ -72,7 +78,7 @@ public class ToFile {
 	 * @param in
 	 * @param out
 	 */
-	public void cleanUp(InputStream in, OutputStream out) {
+	protected void cleanUp(InputStream in, OutputStream out) {
 
 		// Input is already open so just close it
 		try {
@@ -82,13 +88,12 @@ public class ToFile {
 		}
 
 		// Output stream default is set to null so if not null has been opened
-		if (out != null) {
 			try {
 				out.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
-		}
+		
 	}
 }
