@@ -2,6 +2,7 @@ package com.siliconmtn.spider;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.siliconmtn.spider.connection.Connection;
@@ -29,16 +30,18 @@ public class SpiderSite {
 
 	// Set up all variables needed for class
 	private Parser parser;
-	private Connection connect;
+	private Connection myConnect;
 	private FileWriter flWriter;
-
-	private SpiderInfo info = null;
-	private StringBuilder spiderBuilder = null;
-	private List<String> links = null;
 	private Socket mySkt;
-	private String sourceAddr = "www.siliconmtn.com";
-	private String fullSource = "http://www.siliconmtn.com";
+	
+	private SpiderInfo info = null;
+	private StringBuilder myData = null;
+	private List<String> myParsedData = null;
+	private String hostName = "www.siliconmtn.com";
+	private String requestUrl = "http://www.siliconmtn.com";
+	private String userAgent = "Java";
 	private int portNumber = 80;
+	private boolean getMobile = false;
 
 	/**
 	 * Main Method, sets up the class then runs it
@@ -47,9 +50,9 @@ public class SpiderSite {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		SpiderSite spider = new SpiderSite();
+		SpiderSite spider = new SpiderSite(false);
 
-		// set up class
+		// choose which setup to use
 		spider.setUp();
 
 		// run the class
@@ -58,31 +61,73 @@ public class SpiderSite {
 	}
 
 	/**
-	 * Class Constructor, takes source data and port #
+	 * Class constructor, When called have to specify if you want mobile or
+	 * desktop version by input of true or false
+	 * 
+	 * @param useMobile
+	 *            - use true of false for which set to render
 	 */
-	public SpiderSite() {
-		// empty Constructor
+	public SpiderSite(boolean useMobile) {
+		this.getMobile = useMobile;
 	}
 
 	/**
-	 * Sets up the class so the class can be used
+	 * Sets up the class for use
 	 */
 	public void setUp() {
 
+		// Check to see user want to spider mobile site
+		if (getMobile == true) {
+			// create a fake mobile system
+			this.userAgent = "Mozilla/5.0 (Linux; U; Android 4.1.1; WOW64; rv:26.0) Gecko/20100101 Mobile Safari/534.0";
+		}
+
 		// Connect to server
-		setSocket("", this.portNumber);
+		setSocket(this.hostName, this.portNumber);
+
+		// Write request to server
+		myConnect.writeSocket(mySkt, this.hostName, this.requestUrl, this.userAgent);
 
 		// Catch back info from server/source
-		spiderBuilder = connect.dataCompiler(mySkt);
+		myData = myConnect.dataCompiler(mySkt);
 
 		// Close the socket
-		closeSocket();
+		//closeSocket();
 
 		// Create instance of info for messages
 		info = new SpiderInfo();
 
 		// Create a new writer
 		flWriter = new FileWriter();
+
+	}
+
+	/**
+	 * handles the redirecting for mobile site
+	 */
+	private void mobileSetUp() {
+
+		// parse through data to get just link
+		String redirect = getLink(0, 1).get(0);
+
+		// create a start and finish index to get out just the link name
+		int begin = redirect.indexOf("http://", 0);
+		int end = redirect.indexOf("c", 0);
+
+		// get just the link name
+		String redirectLink = redirect.substring(begin + 7, end + 10);
+
+		// throw back as the host name
+		this.hostName = redirectLink;
+
+		getMobile = false;
+
+		// run through normal process again
+		setUp();
+
+		System.out.println(info.getInfo("REDIRECT"));
+
+		startSpider();
 	}
 
 	/**
@@ -93,72 +138,104 @@ public class SpiderSite {
 		// Give message stating you are starting parsing info
 		System.out.println(info.getInfo("STARTING"));
 
+		System.out.println(myData);
+
 		// Parse info to get all a link tags
-		parser = new Parser(spiderBuilder);
+		parser = new Parser(myData);
 
-		links = parser.getTags("<a ", "</a>");
-		System.out.println(links);
+		myParsedData = parser.getTags("<a ", "</a>");
+		System.out.println(myParsedData);
 
-		// Send links to fileManager to write to files
-		writeToFile(flWriter, 1, 9);
-
-		// End class
-		if (mySkt.isClosed()) {
-			System.out.println(info.getInfo("SUCCESS"));
+		// checks to see if user wants to spider mobile version
+		if (getMobile == true) {
+			mobileSetUp();
 		}
 
+		// Send links to fileManager to write to files
+		writeToFile(flWriter);
+
+		// End class
+		System.out.println(info.getInfo("SUCCESS"));
 	}
 
-	public void writeToFile(FileWriter writer, int startPoint, int endPoint) {
-		// loop through list of links
+	/**
+	 * Parses through collection of <a href tags and gets just the links
+	 * 
+	 * @param startPoint - where to start parsing of data
+	 * @param endPoint - where to end parsing of data from collection
+	 * @return - parsed out link(s)
+	 */
+	protected List<String> getLink(int startPoint, int endPoint) {
+
+		List<String> linkList = new ArrayList<String>();
+
 		for (int i = startPoint; i < endPoint; i++) {
 			// Get each menu separately
-			String eachLink = links.get(i);
+			String eachLink = myParsedData.get(i);
 
 			// create a start and finish index to get out just the menu name
 			int begin = eachLink.indexOf("href=", 0);
 			int end = eachLink.indexOf(">", 0);
 
 			// get just the menu name
-			String menu = eachLink.substring(begin + 6, end - 1);
-			System.out.println(menu);
+			String link = eachLink.substring(begin + 6, end - 1);
+			System.out.println(link);
+			linkList.add(link);
+
+		}
+		System.out.println(linkList);
+		return linkList;
+	}
+
+	/**
+	 * Takes a source of data and creates a file from it
+	 * 
+	 * @param writer
+	 * @param startPoint
+	 * @param endPoint
+	 */
+	public void writeToFile(FileWriter writer) {
+
+		for (String menu : getLink(1, 9)) {
 
 			// open global socket
-			setSocket(menu, this.portNumber);
+			setSocket(this.hostName, this.portNumber);
+
+			// Write request to server
+			myConnect.writeSocket(mySkt, this.hostName, this.requestUrl + menu,
+					this.userAgent);
 
 			// save each link to a file
 			try {
 				flWriter.fileWriter(
-						mySkt.getInputStream(),info.getInfo("FILE_LOCATION") 
-						+ menu+ info.getInfo("FILE_TYPE_HTML"));
+						mySkt.getInputStream(),
+						info.getInfo("FILE_LOCATION") + menu
+								+ info.getInfo("FILE_TYPE_HTML"));
 
 				// other wise give error message
 			} catch (IOException e) {
-				System.out.println(info.getInfo("ERROR_FILE"));
+				System.out.println("ERRor over here");
 			} catch (Exception e) {
-				System.out.println(info.getInfo("ERROR_FILE"));
+				System.out.println("no over here");
 			}
 
-			// close socket
 			closeSocket();
 		}
 
 	}
 
 	/**
-	 * Sets the socket and writes to it
+	 * Sets the socket
 	 * 
 	 * @param src
 	 * @param portNum
 	 */
-	public void setSocket(String menu, int portNum) {
+	public void setSocket(String host, int portNum) {
 		// Connect to server
-		connect = new Connection();
+		myConnect = new Connection();
 
-		mySkt = connect.getConnection(this.sourceAddr, portNum);
+		mySkt = myConnect.getSocketConnection(host, portNum);
 
-		// Write request to server
-		connect.writeConnection(mySkt, this.fullSource + menu);
 	}
 
 	/**

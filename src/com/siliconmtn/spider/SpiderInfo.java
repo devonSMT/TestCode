@@ -43,10 +43,11 @@ public class SpiderInfo {
 	public HashMap<String, String> getAllInformation(){
 		info.put("STARTING", "Starting to parse data in 3, 2, 1...");
 		info.put("SUCCESS", "All files created successfully");
-		info.put("FILE_LOCATION", "/home/dfranklin/Pictures/");
+		info.put("FILE_LOCATION", "/home/dfranklin/Pictures");
 		info.put("FILE_TYPE_HTML", ".html");
 		info.put("ERROR_FILE", "Error writing to file");
 		info.put("ERROR_SOCKET", "Error! Could not close socket");
+		info.put("REDIRECT", "REDIRECTING TO MOBILE LOCATION \n");
 		return info;
 	}
 }
