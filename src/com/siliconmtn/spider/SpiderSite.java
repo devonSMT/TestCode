@@ -38,7 +38,6 @@ public class SpiderSite {
 	private StringBuilder myData = null;
 	private List<String> myParsedData = null;
 	private String hostName = "www.siliconmtn.com";
-	private String requestUrl = "http://www.siliconmtn.com";
 	private String userAgent = "Mozilla/5.0 (Linux; U; Android 4.1.1; WOW64; rv:26.0) Gecko/20100101 Mobile Safari/534.0";
 	private int portNumber = 80;
 	private boolean getMobile = false;
@@ -103,7 +102,7 @@ public class SpiderSite {
 
 		setSocket(this.hostName, this.portNumber);
 
-		myConnect.writeSocket(mySkt, this.hostName, this.requestUrl,
+		myConnect.writeSocket(mySkt, this.hostName, "http://www.siliconmtn.com",
 				this.userAgent);
 
 		myData = myConnect.dataCompilerReset(mySkt);
@@ -142,8 +141,8 @@ public class SpiderSite {
 		// get just the raw links
 		List<String> myFinalData = parseLink(1, 9);
 
-		flWriter = new FileWriter();
-		writeToFile(flWriter, myFinalData);
+//		flWriter = new FileWriter();
+//		writeToFile(flWriter, myFinalData);
 
 		// End class
 		if(flWriter != null)System.out.println(info.getInfo("SUCCESS"));
