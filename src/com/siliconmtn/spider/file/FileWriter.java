@@ -34,7 +34,7 @@ public class FileWriter {
 	public FileWriter(){
 		//empty constructor
 	}
-
+	
 	/**
 	 * Takes a stream and writes to specific file location
 	 * @param data - an input stream source

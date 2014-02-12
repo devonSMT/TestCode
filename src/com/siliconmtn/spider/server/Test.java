@@ -26,7 +26,6 @@ import java.net.Socket;
 public class Test {
 
 	// A test class
-
 	/**
 	 * @param args
 	 * @throws IOException
@@ -36,24 +35,25 @@ public class Test {
 		// client example
 
 		// create a socket
-		Socket mySocket = new Socket("localhost", 51649);
+		Socket mySocket = new Socket("www.siliconmtn.com", 80);
 
 		// Create output stream to talk to server
 		PrintStream specialPen = new PrintStream(mySocket.getOutputStream());
 
 		// Say something to server
-		specialPen.println("How's your day going?");
+		specialPen.println("GET http://www.siliconmtn.com/");
 
 		// Create input stream to receive info from server
 		BufferedReader specialGlasses = new BufferedReader(
 				new InputStreamReader(mySocket.getInputStream()));
 		
 		//Create string to hold that info
-		String ohISee = specialGlasses.readLine();
+		String ohISee = null ;
+		while(( ohISee = specialGlasses.readLine()) != null){
 		
 		//Display to console
 		System.out.println(ohISee);
-		
+		}
 		//Close the socket
 		mySocket.close();
 		

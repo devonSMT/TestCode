@@ -32,18 +32,10 @@ public class Connection {
 	private Socket clientSocket = null;
 
 	/**
-	 * Class Constructor 
+	 * Class Constructor
 	 */
 	public Connection() {
-		
-	}
-	
-	public static void main (String[] args) {
-		String userAgent = "Mozilla/5.0 (Linux; U; Android 4.1.1; WOW64; rv:26.0) Gecko/20100101 Mobile Safari/534.0";
-		Connection c = new Connection();
-		Socket s = c.getSocketConnection("www.siliconmtn.com", 80);
-		c.writeSocket(s, "www.siliconmtn.com", "http://www.siliconmtn.com", userAgent);
-		StringBuilder sb = c.dataCompiler(s);
+		// empty
 	}
 
 	/**
@@ -54,47 +46,61 @@ public class Connection {
 	 * @param portNumber
 	 *            - Port to which source belongs
 	 */
-	public Socket getSocketConnection(String sourceAddr, int portNumber){
-		//Should try to connect to source/data that was given
+	public Socket getSocketConnection(String sourceAddr, int portNumber) {
 
 		try {
-		//Create a SocketAddress first
-		InetAddress addr = InetAddress.getByName(sourceAddr);
+			// Create a SocketAddress first
+			InetAddress addr = InetAddress.getByName(sourceAddr);
 
-		SocketAddress sockAdr = new InetSocketAddress(addr, portNumber);
+			SocketAddress sockAdr = new InetSocketAddress(addr, portNumber);
 
-		//Create a new socket and assign to global socket
-		this.clientSocket = new Socket();
+			this.clientSocket = new Socket();
 
-		//Set a timeout for connecting to server/source
-		clientSocket.connect(sockAdr, 5000);
+			// Set a timeout for connecting to server/source
+			clientSocket.connect(sockAdr, 5000);
 
-		//Give message if succeeded
-		System.out.println("Connection was successful");
-
+			// Give message if succeeded
+			System.out.println("Connection was successful");
 
 		} catch (UnknownHostException e) {
-		//give message if cannot found the host
-		System.out.println("Unknown host. Please check host name.");
+
+			System.out.println("Unknown host. Please check host name.");
 
 		} catch (IOException e) {
-		// otherwise give other error why could not connect
-		System.out.println("Connection failed. Please verify information.");
+
+			System.out.println("Connection failed. Please verify information.");
 		}
 
 		return clientSocket;
 
-		}
-
+	}
 	/**
-	 * Writes to given source through a given socket with several headers
+	 * Writes to socket
+	 * @param clientSocket
+	 */
+	public void writeSocket(Socket clientSocket, String request){
+		// Create print stream so can write to source/data/server
+		PrintStream clientPrinter = null;
+		
+		try {
+			clientPrinter = new PrintStream(clientSocket.getOutputStream());
+			clientPrinter.println("GET http://" + request);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+	}
+	/**
+	 * Writes to socket with several headers
 	 * 
 	 * @param clientSocket
-	 *            - a socket object
 	 * @param requestURL
 	 *            - full source address(Such as http://web url)
 	 */
-	public void writeSocket(Socket clientSocket, String hostName, String requestURL, String userAgent) {
+	public void writeSocket(Socket clientSocket, String hostName,
+			String requestURL, String userAgent) {
 
 		// Create print stream so can write to source/data/server
 		PrintStream clientPrinter = null;
@@ -105,9 +111,9 @@ public class Connection {
 			clientPrinter.println("GET " + requestURL + " HTTP/1.1");
 			clientPrinter.println("Host: " + hostName);
 			clientPrinter.println("Accept: */*");
-			clientPrinter.println("User-Agent: " + userAgent); 																													
-			clientPrinter.println(""); // Make sure to end request here						
-			
+			clientPrinter.println("User-Agent: " + userAgent);
+			clientPrinter.println(""); // Make sure to end request here
+
 		} catch (IOException e) {
 			// If cannot open give error message
 			System.out.println("Could not open stream.");
@@ -123,30 +129,55 @@ public class Connection {
 	 */
 	public StringBuilder dataCompiler(Socket clientSocket) {
 
-		// Create a StrigBuilder to hold info
 		StringBuilder fullSource = new StringBuilder();
-	
 
-		// Try to read back info from server
+		try {
+			InputStream myReader = clientSocket.getInputStream();
+			int c = 0;
+
+			while ((c = myReader.read()) > -1) {
+
+				fullSource.append((char) c);
+			}
+
+			myReader.close();
+
+		} catch (IOException e) {
+			// System.out.println("error here");
+			e.printStackTrace();
+		}
+
+		return fullSource;
+
+	}
+
+	/**
+	 * Catches back response from server and builds it together
+	 * Prevents a connection reset
+	 * @param clientSocket
+	 * @return StringBuilder object
+	 */
+	public StringBuilder dataCompilerReset(Socket clientSocket) {
+
+		StringBuilder fullSource = new StringBuilder();
+
 		try {
 			InputStream myReader = clientSocket.getInputStream();
 			int c = 0;
 
 			while ((c = myReader.read()) > -1 && myReader.available() > 0) {
-				System.out.print((char)c); 
+
 				fullSource.append((char) c);
 			}
-			
+
 			myReader.close();
-			
+
 		} catch (IOException e) {
-			// give message if failed
-			//System.out.println("error here");
+			// System.out.println("error here");
 			e.printStackTrace();
 		}
 
 		return fullSource;
-		
-	}
 
+	}
 }
