@@ -35,7 +35,15 @@ public class Connection {
 	 * Class Constructor 
 	 */
 	public Connection() {
-		//empty constructor
+		
+	}
+	
+	public static void main (String[] args) {
+		String userAgent = "Mozilla/5.0 (Linux; U; Android 4.1.1; WOW64; rv:26.0) Gecko/20100101 Mobile Safari/534.0";
+		Connection c = new Connection();
+		Socket s = c.getSocketConnection("www.siliconmtn.com", 80);
+		c.writeSocket(s, "www.siliconmtn.com", "http://www.siliconmtn.com", userAgent);
+		StringBuilder sb = c.dataCompiler(s);
 	}
 
 	/**
@@ -122,16 +130,14 @@ public class Connection {
 		// Try to read back info from server
 		try {
 			InputStream myReader = clientSocket.getInputStream();
-			
-			int line = 0;
-			
 			int c = 0;
 
-			while ((c = myReader.read()) > -1) {
+			while ((c = myReader.read()) > -1 && myReader.available() > 0) {
+				System.out.print((char)c); 
 				fullSource.append((char) c);
 			}
 			
-			//myReader.close();
+			myReader.close();
 			
 		} catch (IOException e) {
 			// give message if failed
