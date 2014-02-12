@@ -92,7 +92,7 @@ public class SpiderSite {
 		myData = myConnect.dataCompiler(mySkt);
 
 		// Close the socket
-		//closeSocket();
+		closeSocket();
 
 		// Create instance of info for messages
 		info = new SpiderInfo();
@@ -103,7 +103,7 @@ public class SpiderSite {
 	}
 
 	/**
-	 * handles the redirecting for mobile site
+	 * sets up the class for mobile use
 	 */
 	private void mobileSetUp() {
 
@@ -144,7 +144,6 @@ public class SpiderSite {
 		parser = new Parser(myData);
 
 		myParsedData = parser.getTags("<a ", "</a>");
-		System.out.println(myParsedData);
 
 		// checks to see if user wants to spider mobile version
 		if (getMobile == true) {
@@ -200,7 +199,7 @@ public class SpiderSite {
 
 			// open global socket
 			setSocket(this.hostName, this.portNumber);
-
+			
 			// Write request to server
 			myConnect.writeSocket(mySkt, this.hostName, this.requestUrl + menu,
 					this.userAgent);
@@ -214,7 +213,7 @@ public class SpiderSite {
 
 				// other wise give error message
 			} catch (IOException e) {
-				System.out.println("ERRor over here");
+				e.printStackTrace();
 			} catch (Exception e) {
 				System.out.println("no over here");
 			}

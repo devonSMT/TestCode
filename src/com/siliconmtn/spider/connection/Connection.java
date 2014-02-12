@@ -1,8 +1,7 @@
 package com.siliconmtn.spider.connection;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -100,7 +99,6 @@ public class Connection {
 			clientPrinter.println("Accept: */*");
 			clientPrinter.println("User-Agent: " + userAgent); 																													
 			clientPrinter.println(""); // Make sure to end request here						
-			//clientPrinter.flush();
 			
 		} catch (IOException e) {
 			// If cannot open give error message
@@ -119,20 +117,21 @@ public class Connection {
 
 		// Create a StrigBuilder to hold info
 		StringBuilder fullSource = new StringBuilder();
+	
 
 		// Try to read back info from server
 		try {
-			BufferedReader myReader = new BufferedReader(new InputStreamReader(
-					clientSocket.getInputStream()));
+			InputStream myReader = clientSocket.getInputStream();
+			
+			int line = 0;
+			
+			int c = 0;
 
-			String line = null;
-
-			while ((line = myReader.readLine()) != null) {
-				// add the lines
-				fullSource.append(line);
+			while ((c = myReader.read()) > -1) {
+				fullSource.append((char) c);
 			}
 			
-			myReader.close();
+			//myReader.close();
 			
 		} catch (IOException e) {
 			// give message if failed
