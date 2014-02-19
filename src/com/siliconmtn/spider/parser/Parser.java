@@ -88,4 +88,60 @@ public class Parser {
 		return values;
 	}
 
+
+	/**
+	 * Parses through collection a <a tags to get just bare link
+	 * 
+	 * @param startPoint  where to start parsing of data
+	 * @param endPoint  where to end parsing of data from collection
+	 * @return - parsed out link(s)
+	 */
+	public List<String> parseLink(List<String>parsedLinks, int startPoint, int endPoint) {
+
+		List<String> linkList = new ArrayList<String>();
+
+		for (int i = startPoint; i < endPoint; i++) {
+
+			String eachLink = parsedLinks.get(i);
+
+			int begin = eachLink.indexOf("href=", 0);
+			int end = eachLink.indexOf(">", 0);
+
+			// get just the menu name
+			String link = eachLink.substring(begin + 6, end -1);
+			System.out.println(link);
+			linkList.add(link);
+
+		}
+		return linkList;
+	}
+
+	/**
+	 * @return the parsedData
+	 */
+	public List<String> getParsedData() {
+		return parsedData;
+	}
+
+	/**
+	 * @return the source
+	 */
+	public StringBuilder getSource() {
+		return source;
+	}
+
+	/**
+	 * @return the startList
+	 */
+	public List<Integer> getStartList() {
+		return startList;
+	}
+
+	/**
+	 * @return the endList
+	 */
+	public List<Integer> getEndList() {
+		return endList;
+	}
+
 }

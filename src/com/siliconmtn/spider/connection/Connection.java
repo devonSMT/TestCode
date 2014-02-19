@@ -41,10 +41,8 @@ public class Connection {
 	/**
 	 * Tries to connect to source's end point/server with a given source name
 	 * 
-	 * @param hostName
-	 *            - Pass in a source(such as a web site address)
-	 * @param portNumber
-	 *            - Port to which source belongs
+	 * @param hostName Pass in a source(such as a web site address)
+	 * @param portNumber Port to which source belongs
 	 */
 	public Socket getSocketConnection(String sourceAddr, int portNumber) {
 
@@ -87,14 +85,13 @@ public class Connection {
 			clientPrinter.println("GET http://" + request);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 			
 	}
 	/**
+	 * OverLoad method with parameters
 	 * Writes to socket with several headers
-	 * 
 	 * @param clientSocket
 	 * @param requestURL
 	 *            - full source address(Such as http://web url)
@@ -115,8 +112,8 @@ public class Connection {
 			clientPrinter.println(""); // Make sure to end request here
 
 		} catch (IOException e) {
-			// If cannot open give error message
 			System.out.println("Could not open stream.");
+			e.printStackTrace();
 
 		}
 	}
@@ -143,7 +140,6 @@ public class Connection {
 			myReader.close();
 
 		} catch (IOException e) {
-			// System.out.println("error here");
 			e.printStackTrace();
 		}
 
@@ -152,12 +148,12 @@ public class Connection {
 	}
 
 	/**
+	 * OverLoad method
 	 * Catches back response from server and builds it together
-	 * Prevents a connection reset
 	 * @param clientSocket
 	 * @return StringBuilder object
 	 */
-	public StringBuilder dataCompilerReset(Socket clientSocket) {
+	public StringBuilder dataCompiler2(Socket clientSocket) {
 
 		StringBuilder fullSource = new StringBuilder();
 
@@ -165,6 +161,7 @@ public class Connection {
 			InputStream myReader = clientSocket.getInputStream();
 			int c = 0;
 
+			 //Prevents a connection reset
 			while ((c = myReader.read()) > -1 && myReader.available() > 0) {
 
 				fullSource.append((char) c);
@@ -173,7 +170,6 @@ public class Connection {
 			myReader.close();
 
 		} catch (IOException e) {
-			// System.out.println("error here");
 			e.printStackTrace();
 		}
 

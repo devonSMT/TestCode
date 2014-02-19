@@ -23,7 +23,6 @@ public class SpiderTest {
 	// Test Class
 
 	public static void main(String[] args) throws Exception {
-		
 	
 	}
 
