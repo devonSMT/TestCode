@@ -68,11 +68,15 @@ public class ServletTest extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
+	    // Set refresh, auto load time as 5 seconds
+	    resp.setIntHeader("Refresh", 10);
+	    
 		PrintWriter pw = resp.getWriter();
 		
 		pw.println("<title>Example with GET request</title>");
 		pw.println("<h2> You referred to this page with a get request </h2>");
 		pw.println("<a href=\"ServletExample\">Return to Previous Page</a>");
+		pw.close();
 	}
 	/**
 	 * Method that handles any clean up when servlet is finished makes the

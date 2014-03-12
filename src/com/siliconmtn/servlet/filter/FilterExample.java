@@ -23,20 +23,20 @@ import com.siliconmtn.servlet.listener.Listener;
  */
 public class FilterExample implements Filter {
  
-	private static final Logger myLog = Logger.getLogger(Listener.class
-			.getName());
+	private static final Logger myLog = Logger.getLogger(Listener.class.getName());
+	
 	/**
 	 * called before the filter ends
 	 */
 	public void destroy() {
-		// empty
+		
 	}
 
 	/**
 	 * Handles the initialization of the filter
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		//empty
+		
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class FilterExample implements Filter {
 		String client = request.getRemoteAddr();
 		String host = request.getLocalName();
 		
-		myLog.error("Client address:" + client +" HostName:" + host);
+		myLog.info("Client address:" + client +" HostName:" + host);
 		
 		// pass the request along the filter chain
 		chain.doFilter(request, response);

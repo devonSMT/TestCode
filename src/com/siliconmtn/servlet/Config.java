@@ -18,6 +18,8 @@ public class Config {
 
 	private HashMap<String, String> config = new HashMap<String, String>();
 
+	public static final String JSP_LOCAL_FILE = "jspLocal";
+	
 	// Class Constructor that returns all configurations automatically
 	public Config() {
 		this.getAllConfigs();
@@ -38,7 +40,7 @@ public class Config {
 	 */
 	protected HashMap<String, String> getAllConfigs() {
 		config.put("LOGGER_NAME", "log4jConfig");
-		config.put("JSP_LOCAL", "/WEB-INF/include/test.jsp");
+		config.put(JSP_LOCAL_FILE, "/WEB-INF/include/test.jsp");
 		return config;
 	}
 }

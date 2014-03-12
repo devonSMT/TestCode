@@ -56,11 +56,9 @@ public class Listener implements ServletContextListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//won't show
-		myLog.debug(actualPath);
+		
 		//will show
-		myLog.error(actualPath);
-	
+		myLog.info(actualPath);
 
 	}
 
@@ -69,7 +67,7 @@ public class Listener implements ServletContextListener {
 	 * Handles the event when the app is destroyed(ends)
 	 */
 	public void contextDestroyed(ServletContextEvent arg0) {
-		myLog.error("Life cycle is over.");
+		myLog.info("Life cycle is over.");
 
 	}
 
