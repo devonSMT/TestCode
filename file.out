@@ -1,0 +1,56 @@
+2014-03-12 08:21:46,885 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 08:22:03,313 {doFilter} ERROR Client address:127.0.0.1 HostName:localhost
+2014-03-12 08:22:36,913 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 08:22:37,401 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 08:23:34,068 {doFilter} ERROR Client address:127.0.0.1 HostName:localhost
+2014-03-12 08:23:35,977 {doFilter} ERROR Client address:127.0.0.1 HostName:localhost
+2014-03-12 08:23:46,116 {doFilter} ERROR Client address:127.0.0.1 HostName:localhost
+2014-03-12 08:23:56,146 {doFilter} ERROR Client address:127.0.0.1 HostName:localhost
+2014-03-12 08:25:27,442 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 08:25:27,925 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 08:26:47,947 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 08:26:48,431 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 08:27:08,442 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 08:27:08,912 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 08:38:19,039 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 08:38:19,516 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 08:39:19,534 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 08:39:20,017 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 08:44:50,077 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 08:44:50,548 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 08:45:10,559 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 08:45:11,028 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 08:46:01,039 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 08:46:01,526 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 08:52:21,589 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 08:52:44,542 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 08:53:04,572 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 08:53:05,062 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:01:25,160 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:01:25,641 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:04:05,674 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:04:06,162 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:09:34,045 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:09:35,444 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:10:35,466 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:10:35,961 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:10:50,386 {doFilter} ERROR Client address:127.0.0.1 HostName:localhost
+2014-03-12 09:10:55,309 {doFilter} ERROR Client address:127.0.0.1 HostName:localhost
+2014-03-12 09:12:05,989 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:12:06,470 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:13:08,734 {doFilter} ERROR Client address:127.0.0.1 HostName:localhost
+2014-03-12 09:13:11,896 {doFilter} ERROR Client address:127.0.0.1 HostName:localhost
+2014-03-12 09:14:06,498 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:14:06,985 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:14:11,811 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:14:13,227 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:19:03,304 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:19:03,810 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:19:43,822 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:19:44,294 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:19:54,304 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:19:54,792 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:22:14,825 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:22:15,290 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
+2014-03-12 09:22:25,299 {contextDestroyed} ERROR Life cycle is over.
+2014-03-12 09:22:25,769 {contextInitialized} ERROR /home/dfranklin/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/WebTest/WEB-INF/properties/log4j.properties
