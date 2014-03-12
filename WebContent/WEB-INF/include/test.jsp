@@ -13,9 +13,9 @@ p {	color: blue;}
 </style>
 <body>
 	<h1>My First Example JSP</h1>
-
-	<jsp:include page="data.jsp" flush="true" />
-
+	
+	<c:import url="data.jsp" />
+	
 	<p>${message}</p>
 	<c:choose >
 		<c:when test="${not empty message1 }"><p>Hello World</p></c:when>
