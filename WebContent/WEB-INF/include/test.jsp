@@ -21,6 +21,7 @@ p {	color: blue;}
 		<c:when test="${not empty message1 }"><p>Hello World</p></c:when>
 		<c:otherwise><p>goodbye world</p></c:otherwise>
 	</c:choose>
+	
 	<!-- User enters info, then takes them to a servlet for display -->
 	<form action="ServletTest" method="post">
 		Please enter your name <br> <input type="text" name="name"

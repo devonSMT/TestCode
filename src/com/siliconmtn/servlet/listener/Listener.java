@@ -39,6 +39,7 @@ public class Listener implements ServletContextListener {
 
 	private Config cf = new Config();
 	private String actualPath;
+	private String message;
 
 	@Override
 	/**
@@ -48,7 +49,7 @@ public class Listener implements ServletContextListener {
 
 		try {
 			ServletContext sc = sce.getServletContext();
-			String root = sc.getInitParameter(cf.getGlobalConfig("LOGGER_NAME"));
+			String root = sc.getInitParameter(cf.getGlobalConfig(Config.LOGGER_NAME));
 			actualPath = sc.getRealPath(root);
 
 			PropertyConfigurator.configure(actualPath);
@@ -56,9 +57,8 @@ public class Listener implements ServletContextListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		//will show
-		myLog.info(actualPath);
+		message = "Life cycle event";
+		myLog.info(message);
 
 	}
 
@@ -67,7 +67,7 @@ public class Listener implements ServletContextListener {
 	 * Handles the event when the app is destroyed(ends)
 	 */
 	public void contextDestroyed(ServletContextEvent arg0) {
-		myLog.info("Life cycle is over.");
+		myLog.info(message);
 
 	}
 

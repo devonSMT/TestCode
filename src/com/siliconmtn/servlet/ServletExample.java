@@ -22,8 +22,7 @@ public class ServletExample extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Config config = new Config();
 	protected ServletContext ctx = null;
-	
-	String jspFile = null;
+	protected String jspFile = null;
 	
 	/**
 	 * Method that does any require initialization for entire life cycle
@@ -48,9 +47,8 @@ public class ServletExample extends HttpServlet {
 
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/**
+	 * If sent a post request will reroute it to the get response handler method
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	throws ServletException, IOException {

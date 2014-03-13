@@ -1,0 +1,11 @@
+# Class path directory
+*.classpath
+
+# build directory
+build/
+
+# settings directory
+*.settings
+
+# project directory
+*.project
